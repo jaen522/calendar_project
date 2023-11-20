@@ -1,6 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scheduleFragment" />
+    tools:context=".scheduleFragment" >
+
+    <TextView
+        android:id="@+id/chk_aname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="386dp"
+        android:layout_height="557dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.878">
+
+        <EditText
+            android:id="@+id/s_name"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:ems="10"
+            android:hint="Event name"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="196dp" />
+
+        <EditText
+            android:id="@+id/s_memo"
+            android:layout_width="match_parent"
+            android:layout_height="139dp"
+            android:ems="10"
+            android:hint="Type the note here..."
+            android:inputType="text"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="247dp" />
+
+        <EditText
+            android:id="@+id/s_date"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:hint="date"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="404dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/s_time_Start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Start time"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/s_time_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="End time"
+                android:inputType="time" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="Select Catgeory"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/category1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="school"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black"
+                android:textColorLink="@color/black"
+                app:iconTint="#000000"
+                app:rippleColor="#000000" />
+
+            <Button
+                android:id="@+id/category2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="friends" />
+
+            <Button
+                android:id="@+id/category3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="workout" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/finish_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Event" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

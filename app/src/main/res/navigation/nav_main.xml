@@ -14,7 +14,11 @@
         android:id="@+id/scheduleFragment"
         android:name="com.example.scheduleapp.scheduleFragment"
         android:label="일정"
-        tools:layout="@layout/fragment_schedule" />
+        tools:layout="@layout/fragment_schedule" >
+        <action
+            android:id="@+id/action_scheduleFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
     <fragment
         android:id="@+id/todoFragment"
         android:name="com.example.scheduleapp.todoFragment"
@@ -24,5 +28,9 @@
         android:id="@+id/accountFragment"
         android:name="com.example.scheduleapp.accountFragment"
         android:label="가계부"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
 </navigation>
