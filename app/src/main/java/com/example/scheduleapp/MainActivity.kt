@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CalendarView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -19,12 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val navController = binding.frgNav.getFragment<NavHostFragment>().navController
-        setupActionBarWithNavController(navController)
+        val navController=binding.frgNav.getFragment<NavHostFragment>().navController
         binding.bottomNav.setupWithNavController(navController)
         setContentView(binding.root)
-        //객체생성
-        
         }
     override fun onSupportNavigateUp(): Boolean {
         val navController=binding.frgNav.getFragment<NavHostFragment>().navController
