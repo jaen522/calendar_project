@@ -63,11 +63,12 @@ class scheduleFragment : Fragment() {
         return view
     }
 
-    //checkfragmnet로 확인하는용
+    //저장이 제대로 되는지 확인하는 용
     internal fun getScheduleName(): String {
         return schedule_name
     }
 
+    /*
     companion object {
         fun newInstance(str: String): scheduleFragment {
             val frag = scheduleFragment()
@@ -77,7 +78,7 @@ class scheduleFragment : Fragment() {
             return frag
         }
     }
-
+*/
     //내비게이션에서 schedule의 맨 밑 버튼 변수 finish_schedule을 누르면 메인화면으로 넘어갈 수 있게
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
