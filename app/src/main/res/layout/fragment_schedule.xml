@@ -19,6 +19,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/chk_cate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="카테고리뜨게"
+        tools:layout_editor_absoluteX="308dp"
+        tools:layout_editor_absoluteY="72dp" />
+
+    <TextView
         android:id="@+id/chk_aname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,7 +117,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/category1"
+                android:id="@+id/btn_school"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -121,14 +129,14 @@
                 app:rippleColor="#000000" />
 
             <Button
-                android:id="@+id/category2"
+                android:id="@+id/btn_friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="friends" />
 
             <Button
-                android:id="@+id/category3"
+                android:id="@+id/btn_workout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -8,5 +8,5 @@ class schedule_viewmodel: ViewModel() {
     var schedule_date : String = ""
     var schedule_time_start : String = ""
     var schedule_time_end : String = ""
-
+    var schedule_category : String = ""
 }
