@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.R.id.s_name
 import com.example.scheduleapp.databinding.FragmentScheduleBinding
+import com.example.scheduleapp.viewmodel.schedule_viewmodel
 import kotlin.time.Duration.Companion.seconds
 
 
@@ -18,6 +20,9 @@ class scheduleFragment : Fragment() {
 
    // var text: String? = null
     private var binding: FragmentScheduleBinding? = null
+    //변수 연동을 위한 viewmodel 이용
+
+    val scheduleViewmodel: schedule_viewmodel by activityViewModels()
 
     /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,18 +53,21 @@ class scheduleFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
 
-        val s_name: EditText = view.findViewById(R.id.s_name)
-        val s_memo: EditText = view.findViewById(R.id.s_memo)
-        val s_date: EditText = view.findViewById(R.id.s_date)
-        val s_time_Start: EditText = view.findViewById(R.id.s_time_Start)
-        val s_time_end: TextView = view.findViewById(R.id.s_time_end)
+        val btnschedule :Button = view.findViewById(R.id.finish_schedule)
 
-        schedule_name = s_name.text.toString()
-        schedule_memo = s_name.text.toString()
-        schedule_date = s_name.text.toString()
-        schedule_time_start = s_name.text.toString()
-        schedule_time_end = s_name.text.toString()
+        btnschedule.setOnClickListener {
+            val ss_name: EditText = view.findViewById(R.id.s_name)
+            val ss_memo: EditText = view.findViewById(R.id.s_memo)
+            val ss_date: EditText = view.findViewById(R.id.s_date)
+            val ss_time_start: EditText = view.findViewById(R.id.s_time_Start)
+            val ss_time_end: EditText = view.findViewById(R.id.s_time_end)
 
+            scheduleViewmodel.schedule_name = ss_name.text.toString()
+            scheduleViewmodel.schedule_memo = ss_memo.text.toString()
+            scheduleViewmodel.schedule_date = ss_date.text.toString()
+            scheduleViewmodel.schedule_time_start = ss_time_start.text.toString()
+            scheduleViewmodel.schedule_time_end = ss_time_end.text.toString()
+        }
         return view
     }
 

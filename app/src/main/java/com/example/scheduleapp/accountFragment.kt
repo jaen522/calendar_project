@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.databinding.FragmentAccountBinding
+import com.example.scheduleapp.viewmodel.schedule_viewmodel
 
 
 class accountFragment : Fragment() {
@@ -63,7 +65,13 @@ class accountFragment : Fragment() {
         val checknameTextView: TextView = view.findViewById(R.id.chk_sname)
         checknameTextView.text = scheduleFragment.getScheduleName()
         */
+    //체크용
+        val scheduleViewmodel: schedule_viewmodel by activityViewModels()
+        val check_sname = scheduleViewmodel.schedule_name
 
+
+        val checksnameTextView: TextView = view.findViewById(R.id.chk_sname)
+        checksnameTextView.text = check_sname
 
     }
     override fun onDestroyView() {
