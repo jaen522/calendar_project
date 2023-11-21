@@ -62,7 +62,7 @@
             android:layout_marginTop="70dp"
             android:text=" 중요한 일 입니까?"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:visibility="visible" />
 
         <Button
