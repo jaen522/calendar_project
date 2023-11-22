@@ -1,18 +1,12 @@
 package com.example.scheduleapp
 
-import android.icu.text.DateFormat
-import android.icu.text.SimpleDateFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CalendarView
-import android.widget.TextView
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scheduleapp.databinding.ActivityMainBinding
-import java.sql.Date
+
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding

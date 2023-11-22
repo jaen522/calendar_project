@@ -6,50 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".todoFragment" >
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="56dp"
-        android:text="To do"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="56dp"
+            android:text="To do"
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/t_name"
             android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_marginTop="100dp"
             android:ems="10"
             android:hint="Event name"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/t_memo"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:ems="10"
-            android:hint="Typr the note here"
             android:inputType="text" />
 
         <EditText
             android:id="@+id/t_date"
             android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_marginTop="30dp"
             android:ems="10"
             android:hint="Date"
             android:inputType="text" />
@@ -59,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="100dp"
             android:text=" 중요한 일 입니까?"
             android:textAlignment="center"
             android:textSize="20sp"

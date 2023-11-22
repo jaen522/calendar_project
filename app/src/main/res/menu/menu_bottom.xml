@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/calendarFragment"
-        android:icon="@drawable/calendar"
-        android:title="달력" />
+        android:icon="@drawable/baseline_home_24"
+        android:title="홈" />
     <item
         android:id="@+id/scheduleFragment"
         android:icon="@drawable/schedule"

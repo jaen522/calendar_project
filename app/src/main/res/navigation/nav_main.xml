@@ -23,7 +23,11 @@
         android:id="@+id/todoFragment"
         android:name="com.example.scheduleapp.todoFragment"
         android:label="할 일"
-        tools:layout="@layout/fragment_todo" />
+        tools:layout="@layout/fragment_todo" >
+        <action
+            android:id="@+id/action_todoFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.scheduleapp.accountFragment"
