@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343482015142",
+    "project_id": "calendar-project-f2450",
+    "storage_bucket": "calendar-project-f2450.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343482015142:android:d2a17459b4fd4283784367",
+        "android_client_info": {
+          "package_name": "com.example.scheduleapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtJL-U4docI5g9AslDrPpwyHb2wKAnht4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -94,8 +94,6 @@ class scheduleFragment : Fragment() {
             scheduleViewmodel.schedule_time_end = ss_time_end.text.toString()
         }
 
-
-
         return view
     }
 
