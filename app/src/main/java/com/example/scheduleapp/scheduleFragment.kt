@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.R.id.btn_friends
@@ -15,6 +16,8 @@ import com.example.scheduleapp.R.id.btn_school
 import com.example.scheduleapp.R.id.s_name
 import com.example.scheduleapp.databinding.FragmentScheduleBinding
 import com.example.scheduleapp.viewmodel.schedule_viewmodel
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlin.time.Duration.Companion.seconds
 
 
@@ -76,10 +79,16 @@ class scheduleFragment : Fragment() {
             val category: Category_type = Category_type.workout
         }
 
+        /*
         //맨 밑에 있는 'create event'버튼을 눌렀을때 다음 변수들이 저장되게
         val btnschedule :Button = view.findViewById(R.id.finish_schedule)
-
         btnschedule.setOnClickListener {
+            addDataScheduleToFireBase()
+        }*/
+
+
+        /*
+                btnschedule.setOnClickListener {
 
             val ss_name: EditText = view.findViewById(R.id.s_name)
             val ss_memo: EditText = view.findViewById(R.id.s_memo)
@@ -92,9 +101,33 @@ class scheduleFragment : Fragment() {
             scheduleViewmodel.schedule_date = ss_date.text.toString()
             scheduleViewmodel.schedule_time_start = ss_time_start.text.toString()
             scheduleViewmodel.schedule_time_end = ss_time_end.text.toString()
-        }
+        }*/
 
         return view
+    }
+
+    //데이터 수집
+    private fun addDataScheduleToFireBase() {
+        val s_edit_name: EditText = requireView().findViewById(R.id.s_name)
+        val s_edit_memo: EditText = requireView().findViewById(R.id.s_memo)
+
+        val ss_name: String = s_edit_name.text.toString()
+        val ss_memo: String = s_edit_memo.text.toString()
+
+        //데이터를 리스트에 추가
+        val dataScheduleList = mutableListOf<Any>()
+        dataScheduleList.add(ss_name)
+        dataScheduleList.add(ss_memo)
+
+        //파이어베이스 db에 업로드
+        val database = FirebaseDatabase.getInstance()
+        val myschedule: DatabaseReference = database.getReference("calender project")
+
+        val userId: String = myschedule.push().key!!
+        myschedule.child(userId).setValue(dataScheduleList)
+
+        s_edit_name.text.clear()
+        s_edit_memo.text.clear()
     }
 
     //저장이 제대로 되는지 확인하는 용
@@ -120,6 +153,9 @@ class scheduleFragment : Fragment() {
 
         view.findViewById<Button>(R.id.finish_schedule)?.setOnClickListener {
             findNavController().navigate(R.id.action_scheduleFragment_to_calendarFragment)
+
+            addDataScheduleToFireBase()
+
         }
     }
 
