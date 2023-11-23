@@ -11,7 +11,7 @@
         android:label="캘린더"
         tools:layout="@layout/fragment_calendar" />
     <fragment
-        android:id="@+id/scheduleFragment"
+        android:id="@+id/ScheduleFragment"
         android:name="com.example.scheduleapp.scheduleFragment"
         android:label="일정"
         tools:layout="@layout/fragment_schedule" >

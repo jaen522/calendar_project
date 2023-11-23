@@ -1,13 +1,13 @@
 package com.example.scheduleapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.databinding.FragmentAccountBinding
 
@@ -56,13 +56,6 @@ class accountFragment : Fragment() {
         view.findViewById<Button>(R.id.finish_account)?.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_calendarFragment)
         }
-
-        /*//체크용, 화면에 calendar name띄우기 이 주석을 풀면 account로 안가던데 왜지
-        val delscheduleFragment = delscheduleFragment()
-
-        val checknameTextView: TextView = view.findViewById(R.id.chk_sname)
-        checknameTextView.text = delscheduleFragment.getScheduleName()
-        */
 
     }
     override fun onDestroyView() {
