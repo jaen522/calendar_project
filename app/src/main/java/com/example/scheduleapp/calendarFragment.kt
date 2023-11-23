@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scheduleapp.databinding.FragmentCalendarBinding
 
 
 class calendarFragment : Fragment() {
-    private lateinit var todoAdapter: TodoAdapter
+    //private lateinit var todoAdapter: TodoAdapter
     private val mDatas= mutableListOf<LayoutTodo>()
     lateinit var binding: FragmentCalendarBinding
     override fun onCreateView(
@@ -23,13 +22,13 @@ class calendarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        todoAdapter=TodoAdapter()
+        /*todoAdapter=TodoAdapter()
         mDatas.apply {
             LayoutTodo.add()
         }
         todoAdapter.replaceList(mDatas)
         binding.recTodo.adapter=todoAdapter
-
+    */
     }
 
 
