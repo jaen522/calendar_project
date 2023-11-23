@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.databinding.FragmentAccountBinding
-import com.example.scheduleapp.viewmodel.schedule_viewmodel
+
 
 class accountFragment : Fragment() {
 
@@ -59,17 +58,11 @@ class accountFragment : Fragment() {
         }
 
         /*//체크용, 화면에 calendar name띄우기 이 주석을 풀면 account로 안가던데 왜지
-        val scheduleFragment = scheduleFragment()
+        val delscheduleFragment = delscheduleFragment()
 
         val checknameTextView: TextView = view.findViewById(R.id.chk_sname)
-        checknameTextView.text = scheduleFragment.getScheduleName()
+        checknameTextView.text = delscheduleFragment.getScheduleName()
         */
-    //체크용
-        val scheduleViewmodel: schedule_viewmodel by activityViewModels()
-        val check_sname = scheduleViewmodel.schedule_name
-
-        val checksnameTextView: TextView = view.findViewById(R.id.chk_sname)
-        checksnameTextView.text = check_sname
 
     }
     override fun onDestroyView() {
