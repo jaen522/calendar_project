@@ -7,7 +7,7 @@
         android:icon="@drawable/baseline_home_24"
         android:title="홈" />
     <item
-        android:id="@+id/ScheduleFragment"
+        android:id="@+id/scheduleFragment"
         android:icon="@drawable/schedule"
         android:title="일정 추가" />
     <item

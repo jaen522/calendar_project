@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "343482015142",
-    "project_id": "calendar-project-f2450",
-    "storage_bucket": "calendar-project-f2450.appspot.com"
+    "project_number": "246860221976",
+    "firebase_url": "https://tododata-f94c1-default-rtdb.firebaseio.com",
+    "project_id": "tododata-f94c1",
+    "storage_bucket": "tododata-f94c1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:343482015142:android:d2a17459b4fd4283784367",
+        "mobilesdk_app_id": "1:246860221976:android:55061374743f2901e27d6d",
         "android_client_info": {
           "package_name": "com.example.scheduleapp"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCtJL-U4docI5g9AslDrPpwyHb2wKAnht4"
+          "current_key": "AIzaSyD8CHqCv8Fjs2h1fbot8H3_Wn-uoYxR3zI"
         }
       ],
       "services": {
