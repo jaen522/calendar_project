@@ -20,7 +20,7 @@
 
     <LinearLayout
         android:layout_width="389dp"
-        android:layout_height="463dp"
+        android:layout_height="516dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:orientation="vertical"
@@ -36,15 +36,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/accountbook_State"
+            <CheckBox
+                android:id="@+id/a_state_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="income" />
 
-            <Button
-                android:id="@+id/accountbook_state"
+            <CheckBox
+                android:id="@+id/a_state_ex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -85,10 +85,16 @@
             android:inputType="date" />
 
         <Button
-            android:id="@+id/finish_account"
+            android:id="@+id/btn_fin_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create Event" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

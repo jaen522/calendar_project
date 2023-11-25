@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.scheduleapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.scheduleapp"
@@ -37,6 +37,7 @@ android {
     viewBinding {
         enable=true
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
@@ -48,6 +49,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("com.google.firebase:firebase-database:20.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -57,5 +59,6 @@ dependencies {
 
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+
 
 }
