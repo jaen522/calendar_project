@@ -84,14 +84,6 @@
             android:hint="date"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/a_date2"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:ems="10"
-            android:hint="Date"
-            android:inputType="date" />
-
         <Button
             android:id="@+id/btn_fin_account"
             android:layout_width="match_parent"

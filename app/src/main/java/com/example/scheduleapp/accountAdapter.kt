@@ -40,4 +40,15 @@ class accountAdapter(private val accountList: List<String>) :
         return accountList.size
     }
 
+
+
 }
+
+/* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        accadapter = accountAdapter(accountList)
+      //  binding.recyclerView45.layoutManager = LinearLayoutManager(requireContext())
+       // binding.recyclerView45.adapter = accadapter
+
+ */
