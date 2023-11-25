@@ -4,7 +4,7 @@ enum class State{
     income, expense
 }
 
-data class account_list (val account_state : State,
+data class account_list (val account_state : String,
                          val account_money: String,
                          val account_name: String,
                          val account_memo: String,

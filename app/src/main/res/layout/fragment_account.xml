@@ -79,6 +79,14 @@
         <EditText
             android:id="@+id/a_date"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="date"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/a_date2"
+            android:layout_width="match_parent"
             android:layout_height="75dp"
             android:ems="10"
             android:hint="Date"
@@ -91,7 +99,7 @@
             android:text="Create Event" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView45"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
