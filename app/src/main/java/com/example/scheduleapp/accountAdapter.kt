@@ -8,24 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
 
 class accountAdapter(private val accountList: List<String>) :
-    RecyclerView.Adapter<accountAdapter.accountViewHolder>() {
+    RecyclerView.Adapter<accountAdapter.accountViewHolder>()
+{
+    var data = listOf<account_list>()
 
     private val database = FirebaseDatabase.getInstance().reference
     private val databaseReference = database.child("account_node")
-    class accountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.textView1)
-        //val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView123)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): accountViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_account, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_account, parent, false)
         return accountViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: accountViewHolder, position: Int) {
         //holder.textView.text = accountList[position]
+
         val accdata = accountList[position]
 
         //holder.recyclerView.get = accdata
@@ -38,6 +35,10 @@ class accountAdapter(private val accountList: List<String>) :
 
     override fun getItemCount(): Int {
         return accountList.size
+    }
+    class accountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val textView: TextView = itemView.findViewById(R.id.textView1)
+        //val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView123)
     }
 
 

@@ -15,9 +15,8 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ScheduleFragment : Fragment() {
 
-    enum class Category_type {
-        school, friends, workout
-    }
+
+    private var currentcate: Cate = Cate.school
 
     data class Schedule(
         val schedule_name: String, val schedule_memo: String,
@@ -25,15 +24,12 @@ class ScheduleFragment : Fragment() {
     )
 
     private var binding: FragmentScheduleBinding? = null
-    //변수 연동을 위한 viewmodel 이용
-    //val scheduleViewmodel: schedule_viewmodel by activityViewModels()
 
     private val ScheduleList = mutableListOf<Schedule>()
 
    /* override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }*/
 
@@ -47,19 +43,21 @@ class ScheduleFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
 
         //카테고리 설정 //
-        /*
-        val btncate1 : Button = view.findViewById(R.id.btn_school)
-        btncate1.setOnClickListener {
-            val category: Category_type = Category_type.school
+        binding!!.chkSchool.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                currentcate = Cate.school
+            }
         }
-        val btncate2 : Button = view.findViewById(R.id.btn_friends)
-        btncate2.setOnClickListener {
-            val category: Category_type = Category_type.friends
+        binding!!.chkFriends.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                currentcate = Cate.friends
+            }
         }
-        val btncate3 : Button = view.findViewById(R.id.btn_workout)
-        btncate3.setOnClickListener {
-            val category: Category_type = Category_type.workout
-        }*/
+        binding!!.chkWorkout.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                currentcate = Cate.workout
+            }
+        }
 
         //입력받아오기
 
@@ -109,31 +107,6 @@ class ScheduleFragment : Fragment() {
             myRef.child(scheID).setValue(schedule)
         }
     }
-    /*
-       //데이터 수집
-       private fun addDataScheduleToFireBase() {
-           val s_edit_name: EditText = requireView().findViewById(R.id.s_name)
-           val s_edit_memo: EditText = requireView().findViewById(R.id.s_memo)
-
-           val ss_name: String = s_edit_name.text.toString()
-           val ss_memo: String = s_edit_memo.text.toString()
-
-           //데이터를 리스트에 추가
-           val dataScheduleList = mutableListOf<Any>()
-           dataScheduleList.add(ss_name)
-           dataScheduleList.add(ss_memo)
-
-           //파이어베이스 db에 업로드
-           val database = FirebaseDatabase.getInstance()
-           val myschedule: DatabaseReference = database.getReference("calender project")
-
-           val userId: String = myschedule.push().key!!
-           myschedule.child(userId).setValue(dataScheduleList)
-
-           s_edit_name.text.clear()
-           s_edit_memo.text.clear()
-       }*/
-
 
     //내비게이션에서 schedule의 맨 밑 버튼 변수 finish_schedule을 누르면 메인화면으로 넘어갈 수 있게
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

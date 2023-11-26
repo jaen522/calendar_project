@@ -98,31 +98,27 @@
             android:layout_height="76dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_school"
+            <CheckBox
+                android:id="@+id/chk_school"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="school"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@color/black"
-                android:textColorLink="@color/black"
-                app:iconTint="#000000"
-                app:rippleColor="#000000" />
+                android:text="School" />
 
-            <Button
-                android:id="@+id/btn_friends"
+            <CheckBox
+                android:id="@+id/chk_friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="friends" />
 
-            <Button
-                android:id="@+id/btn_workout"
+            <CheckBox
+                android:id="@+id/chk_workout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="workout" />
+
         </LinearLayout>
 
         <Button

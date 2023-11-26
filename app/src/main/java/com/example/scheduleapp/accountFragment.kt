@@ -59,6 +59,7 @@ class accountFragment : Fragment() {
             val accdata = "$accountstate - $accountmoney - $accountmemo - $accountname -$accountdate"
 
             accountList.add(accdata)
+
             accadapter.notifyDataSetChanged()
 
             //firebase연동
@@ -66,7 +67,6 @@ class accountFragment : Fragment() {
             val myaccount = database.getReference("account_node")
 
             //firebase 데이터 추가하기
-           //val newacc = accountList
             myaccount.push().setValue(accdata)
 
             //입력했던 값 초기화
