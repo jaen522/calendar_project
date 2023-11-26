@@ -16,16 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/txt_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2023년 11월 15일"
-            android:textAlignment="center"
-            android:textColor="#474D6C"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_schedule"
             android:layout_width="match_parent"

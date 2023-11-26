@@ -1,29 +1,31 @@
 package com.example.scheduleapp
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scheduleapp.databinding.ListTodoBinding
 
-class TodoAdapter(val layoutTodo: Array<LayoutTodo>):RecyclerView.Adapter<TodoAdapter.TodoHolder>(){
-    private var data= mutableListOf<LayoutTodo>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoHolder {
-        val binding = ListTodoBinding.inflate(LayoutInflater.from(parent.context))
-        return TodoHolder(binding)
+class TodoAdapter(var items: MutableList<TodoList>):RecyclerView.Adapter<TodoAdapter.ViewHolder>(){
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.list_todo,parent,false)
+        return ViewHolder(v)
     }
-
-    override fun getItemCount() = layoutTodo.size
-
-    override fun onBindViewHolder(holder: TodoHolder, position: Int) {
-        holder.bind(layoutTodo[position])
+    override fun getItemCount():Int = items.count()
+    override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int) {
+        holder.bindItems(items[position])
     }
-    inner class TodoHolder(private val binding: ListTodoBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(layoutTodo: LayoutTodo){
-            binding.tdCheck.text= layoutTodo.name
+    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        fun bindItems(items:TodoList){
+            val todoName: TextView = itemView.findViewById(R.id.t_name)
+            val todoDate: TextView = itemView.findViewById(R.id.t_date)
+            todoName.text=items.todoName
+            todoDate.text=items.todoDate
         }
     }
-    fun replaceList(newList: MutableList<LayoutTodo>){
-        data=newList.toMutableList()
+    fun replaceList(newList: MutableList<TodoList>){
+        items=newList.toMutableList()
         notifyDataSetChanged()
     }
 }
