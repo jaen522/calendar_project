@@ -26,10 +26,9 @@ class calendarFragment : Fragment() {
         todoAdapter=TodoAdapter(todoList)
         binding?.recTodo?.layoutManager=LinearLayoutManager(context)
         binding?.recTodo?.adapter=todoAdapter
-
     }
 
-        // addValueEventListener() 메서드로 DatabaseReference에 ValueEventListener를 추가한다.
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding=null

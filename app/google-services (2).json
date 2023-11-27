@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "737243098542",
+    "firebase_url": "https://teamproject-calender-default-rtdb.firebaseio.com",
+    "project_id": "teamproject-calender",
+    "storage_bucket": "teamproject-calender.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737243098542:android:335b0ecf5fe5f64d44ec3f",
+        "android_client_info": {
+          "package_name": "com.example.schedule"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCriBxuoT6CtvjEK9kLYJqPJi3gkiWy4Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737243098542:android:2a0c817338fab6f244ec3f",
+        "android_client_info": {
+          "package_name": "com.example.scheduleapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCriBxuoT6CtvjEK9kLYJqPJi3gkiWy4Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
