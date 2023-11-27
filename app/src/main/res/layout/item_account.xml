@@ -21,7 +21,6 @@
 
         <TextView
             android:id="@+id/total_text_view"
-            tools:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -42,7 +41,6 @@
 
             <TextView
                 android:id="@+id/name_text_view"
-                tools:text="객프 팀플"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="학식"
@@ -51,7 +49,6 @@
 
             <TextView
                 android:id="@+id/memo_text_view"
-                tools:text="항식당"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="토스카드"
@@ -61,7 +58,6 @@
 
         <TextView
             android:id="@+id/money_text_view"
-            tools:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

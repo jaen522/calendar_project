@@ -48,7 +48,6 @@
             android:id="@+id/a_money"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:digits="100000000"
             android:ems="10"
             android:hint="How Much"
             android:inputType="number" />
