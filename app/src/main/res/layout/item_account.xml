@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/title_account_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:orientation="vertical">
 
@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:text="textview"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -44,6 +45,7 @@
                 tools:text="객프 팀플"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="학식"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -52,6 +54,7 @@
                 tools:text="항식당"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="토스카드"
                 android:textSize="11sp" />
 
         </LinearLayout>
@@ -61,7 +64,8 @@
             tools:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp" />
+            android:layout_marginLeft="16dp"
+            android:text="6000" />
 
     </LinearLayout>
 </LinearLayout>
