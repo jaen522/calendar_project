@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 class TodoAdapter(var items: MutableList<TodoList>):RecyclerView.Adapter<TodoAdapter.ViewHolder>(){
 
@@ -22,6 +24,7 @@ class TodoAdapter(var items: MutableList<TodoList>):RecyclerView.Adapter<TodoAda
             val todoDate: TextView = itemView.findViewById(R.id.t_date)
             todoName.text=items.todoName
             todoDate.text=items.todoDate
+
         }
     }
     fun replaceList(newList: MutableList<TodoList>){

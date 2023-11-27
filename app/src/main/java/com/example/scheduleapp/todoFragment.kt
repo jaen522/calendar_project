@@ -1,13 +1,16 @@
 package com.example.scheduleapp
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.databinding.FragmentTodoBinding
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 class todoFragment : Fragment() {
     private lateinit var binding:FragmentTodoBinding
@@ -20,15 +23,19 @@ class todoFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.finish_todo)?.setOnClickListener {
+        inView()
+    }
+    private fun inView(){
+        binding.finishTodo.setOnClickListener{
+            val database = Firebase.database
+            val todoRef=database.getReference("todo")
             val todoName = binding.tName.text.toString()
-            val todoDate = binding.tCheck.text.toString()
-            val key = TDRef.contentRef.push().key.toString()
-            // child()는 해당 키 위치로 이동하는 메서드로 child()를 사용하여 key 값의 하위에 값을 저장한다.
-            // setValue() 메서드를 사용하여 값을 저장한다.
-            TDRef.contentRef
-                .child(key)
-                .setValue(TodoList(todoName,todoDate))
+            val todoDate = binding.tDate.text.toString()
+
+            todoRef.push().setValue(TodoList(todoName,todoDate))
+            Log.d(TAG,"todoRef::$todoRef")
+            binding.tName.text.clear()
+            binding.tDate.text.clear()
             findNavController().navigate(R.id.action_todoFragment_to_calendarFragment)
         }
     }
