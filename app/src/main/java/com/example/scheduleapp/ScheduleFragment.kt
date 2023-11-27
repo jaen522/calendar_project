@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 class ScheduleFragment : Fragment() {
 
 
-    private var currentcate: Cate = Cate.school
+
 
     data class Schedule(
         val schedule_name: String, val schedule_memo: String,
@@ -42,22 +42,7 @@ class ScheduleFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
 
-        //카테고리 설정 //
-        binding!!.chkSchool.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
-                currentcate = Cate.school
-            }
-        }
-        binding!!.chkFriends.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
-                currentcate = Cate.friends
-            }
-        }
-        binding!!.chkWorkout.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                currentcate = Cate.workout
-            }
-        }
+
 
         //입력받아오기
 

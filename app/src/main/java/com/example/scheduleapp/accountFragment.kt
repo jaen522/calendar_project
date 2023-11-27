@@ -1,21 +1,41 @@
 package com.example.scheduleapp
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.databinding.FragmentAccountBinding
-import com.google.firebase.database.FirebaseDatabase
+import com.example.scheduleapp.listmodel.Appaccount
+import com.example.scheduleapp.listmodel.State
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class accountFragment : Fragment() {
 
     private lateinit var binding : FragmentAccountBinding
-    private val accountList = mutableListOf<String>()
-    private lateinit var accadapter: accountAdapter
-    private var currentState: State = State.income
 
+    //날짜 선택
+    private var date: Calendar? = null
+        set(value) {
+            field = value
+
+            if (value == null) {
+                binding.calDate.setText("")
+            } else {
+                binding.calDate.setText(
+                    SimpleDateFormat(
+                        "yyyy/MM/dd",
+                        Locale.KOREA
+                    ).format(value.time)
+                )
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,76 +45,89 @@ class accountFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        accadapter = accountAdapter(accountList)
-        binding.recyclerView45.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView45.adapter = accadapter
-
-        //state  설정
-        binding.aStateIn.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                currentState = State.income
-                binding.aStateEx.isChecked =! isChecked
+        with(binding){
+            //수입 지출 체크박스 관련
+            aStateIn.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    aStateEx.isChecked = !isChecked
+                }
             }
-        }
 
-        binding.aStateEx.setOnCheckedChangeListener{ _, isChecked->
-            if(isChecked){
-                currentState = State.expense
-                binding.aStateIn.isChecked =! isChecked
+            aStateEx.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked){
+                    aStateIn.isChecked =!isChecked
+                }
             }
-        }
-
-        binding.btnFinAccount.setOnClickListener {
-            val accountstate = currentState
-            val accountmoney = binding.aMoney.text.toString()
-            val accountname = binding.aName.text.toString()
-            val accountmemo = binding.aMemo.text.toString()
-            val accountdate = binding.aDate.text.toString()
-
-            //리스트에 넣기ㄴ
-            val accdata = "$accountstate - $accountmoney - $accountmemo - $accountname -$accountdate"
-
-            accountList.add(accdata)
-
-            accadapter.notifyDataSetChanged()
-
-            //firebase연동
-            val database = FirebaseDatabase.getInstance()
-            val myaccount = database.getReference("account_node")
-
-            //firebase 데이터 추가하기
-            myaccount.push().setValue(accdata)
-
-            //입력했던 값 초기화
-            binding.aMoney.text.clear()
-            binding.aMemo.text.clear()
-            binding.aName.text.clear()
-            binding.aDate.text.clear()
-            binding.aStateIn.isChecked = false
-            binding.aStateEx.isChecked = false
-
-            //새로운 어댑터생성및 설정
-            accadapter = accountAdapter(accountList)
-            binding.recyclerView45.adapter = accadapter
+            //날짜 설정
+            calDate.setOnClickListener {
+                showDatePicker()
+            }
+            //끝내기누르면 저장되게
+            btnFinAccount.setOnClickListener {
+                save()
+            }
 
         }
-
     }
 
-    /*
-        //내비게이션에서 account의 맨 밑 버튼 createevent를 누르면 메인화면으로 넘어갈 수 있게
-        view.findViewById<Button>(R.id.btn_fin_account)?.setOnClickListener {
-            findNavController().navigate(R.id.action_accountFragment_to_calendarFragment)
-        }
-*/
-    /*
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }*/
+    //날짜 선택 다이얼로그 이용하여 띄우는 함수
+    private fun showDatePicker(){
+        val selectedDate = this.date?: Calendar.getInstance()
+
+        DatePickerDialog(requireContext()).apply {
+            updateDate(
+                selectedDate.get(Calendar.YEAR),
+                selectedDate.get(Calendar.MONTH),
+                selectedDate.get(Calendar.DAY_OF_MONTH)
+            )
+
+            setOnDateSetListener { _, y1, m1, d1 ->
+                val date = Calendar.getInstance().apply {
+                    set(y1,m1,d1,0,0,0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                this@accountFragment.date = date
+            }
+        }.show()
+    }
+    //데이터 저장하고 저장하고 나면 메인화면으로 이동
+    private  fun  save() = with(binding){
+        val state=
+            if (aStateIn.isChecked) State.income
+            else if (aStateEx.isChecked) State.expense
+            else null
+        val money = aMoney.text.toString().trim().toIntOrNull()
+        val name = aName.text.toString().trim()
+        val memo =aMemo.text.toString().trim()
+        val date = this@accountFragment.date
+
+        if (state == null) return@with
+        if (money == null || money == 0) return@with
+        if (name.isEmpty()) return@with
+        if (date == null) return@with
+
+        val account = Appaccount(state.name, money, name, memo, date.timeInMillis)
+
+        //파이어베이스에 연동하여 저장
+        Firebase.database.reference
+            .child("account_list")
+            .push()
+            .setValue(account)
+
+        //리셋
+        aStateIn.isChecked = false
+        aStateEx.isChecked = false
+        aMoney.text.clear()
+        aName.text.clear()
+        aMemo.text.clear()
+        this@accountFragment.date = null
+
+        //이동
+        findNavController().navigate(R.id.action_accountFragment_to_calendarFragment)
+
+    }
 }
 

@@ -1,55 +1,73 @@
 package com.example.scheduleapp
 
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
+import com.example.scheduleapp.databinding.ItemAccountBinding
+import com.example.scheduleapp.listmodel.Appaccount
+import com.example.scheduleapp.listmodel.State
 
-class accountAdapter(private val accountList: List<String>) :
-    RecyclerView.Adapter<accountAdapter.accountViewHolder>()
-{
-    var data = listOf<account_list>()
-
-    private val database = FirebaseDatabase.getInstance().reference
-    private val databaseReference = database.child("account_node")
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): accountViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_account, parent, false)
-        return accountViewHolder(view)
+class accountAdapter : ListAdapter<Appaccount, accountAdapter.accountItemViewHolder>(diffUtil) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): accountItemViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemAccountBinding.inflate(inflater, parent, false)
+        return accountItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: accountViewHolder, position: Int) {
-        //holder.textView.text = accountList[position]
+    override fun onBindViewHolder(holder: accountItemViewHolder, position: Int) {
+        val item = getItem(position)
 
-        val accdata = accountList[position]
+        with(holder.binding) {
+            titleAccountList.isVisible = position == 0
+            if (position == 0) {
+                val total =
+                    currentList.sumOf { if (it.state == State.income.name) it.money else -it.money }
+                if (total >= 0) {
+                    totalTextView.setTextColor(Color.parseColor("#6c81c8"))
+                    totalTextView.text = "+$total won"
+                } else {
+                    totalTextView.setTextColor(Color.parseColor("#d4986e"))
+                    totalTextView.text = "$total won"
+                }
+            }
 
-        //holder.recyclerView.get = accdata
-        holder.textView.text = accdata
+            nameTextView.text = item.name
+            memoTextView.text = item.memo
+            memoTextView.isVisible = item.memo.isNotEmpty()
 
-        val datakey = "item_$position"
-        databaseReference.child(datakey).setValue(accdata)
+            when (State.valueOf(item.state)) {
+                State.income -> {
+                    moneyTextView.setTextColor(Color.parseColor("#6c81c8"))
+                    moneyTextView.text = "+${item.money} won"
+                }
 
+                State.expense -> {
+                    moneyTextView.setTextColor(Color.parseColor("#d4986e"))
+                    moneyTextView.text = "-${item.money} won"
+                }
+            }
+        }
     }
 
-    override fun getItemCount(): Int {
-        return accountList.size
+    class accountItemViewHolder(val binding: ItemAccountBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<Appaccount>() {
+            override fun areItemsTheSame(oldItem: Appaccount, newItem: Appaccount): Boolean {
+                return oldItem.timestamp == newItem.timestamp
+            }
+
+            override fun areContentsTheSame(oldItem: Appaccount, newItem: Appaccount): Boolean {
+                return oldItem.name == newItem.name &&
+                        oldItem.memo == newItem.memo &&
+                        oldItem.money == newItem.money &&
+                        oldItem.date == newItem.date
+            }
+        }
     }
-    class accountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.textView1)
-        //val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView123)
-    }
-
-
-
 }
-
-/* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        accadapter = accountAdapter(accountList)
-      //  binding.recyclerView45.layoutManager = LinearLayoutManager(requireContext())
-       // binding.recyclerView45.adapter = accadapter
-
- */
