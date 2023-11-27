@@ -1,14 +1,32 @@
 {
   "project_info": {
-    "project_number": "246860221976",
-    "firebase_url": "https://tododata-f94c1-default-rtdb.firebaseio.com",
-    "project_id": "tododata-f94c1",
-    "storage_bucket": "tododata-f94c1.appspot.com"
+    "project_number": "737243098542",
+    "project_id": "teamproject-calender",
+    "storage_bucket": "teamproject-calender.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:246860221976:android:55061374743f2901e27d6d",
+        "mobilesdk_app_id": "1:737243098542:android:335b0ecf5fe5f64d44ec3f",
+        "android_client_info": {
+          "package_name": "com.example.schedule"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCriBxuoT6CtvjEK9kLYJqPJi3gkiWy4Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737243098542:android:2a0c817338fab6f244ec3f",
         "android_client_info": {
           "package_name": "com.example.scheduleapp"
         }
@@ -16,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD8CHqCv8Fjs2h1fbot8H3_Wn-uoYxR3zI"
+          "current_key": "AIzaSyCriBxuoT6CtvjEK9kLYJqPJi3gkiWy4Yk"
         }
       ],
       "services": {
