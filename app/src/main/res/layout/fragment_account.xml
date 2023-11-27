@@ -72,10 +72,13 @@
             android:id="@+id/cal_date"
             android:layout_width="match_parent"
             android:layout_height="78dp"
+            android:cursorVisible="false"
+            android:focusable="false"
             android:ems="10"
             android:hint="date"
             android:inputType="none"
             tools:longClickable="false" />
+
 
         <Button
             android:id="@+id/btn_fin_account"

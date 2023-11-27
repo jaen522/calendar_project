@@ -73,7 +73,7 @@ class accountFragment : Fragment() {
         }
     }
 
-    //날짜 선택 다이얼로그 이용하여 띄우는 함수
+    //날짜 선택을 다이얼로그 이용하여 하게하는  함수
     private fun showDatePicker(){
         val selectedDate = this.date?: Calendar.getInstance()
 
