@@ -30,7 +30,7 @@ class accountFragment : Fragment() {
             } else {
                 binding.calDate.setText(
                     SimpleDateFormat(
-                        "yyyy/MM/dd",
+                        "yyyy/MM/dd", 
                         Locale.KOREA
                     ).format(value.time)
                 )
@@ -61,7 +61,7 @@ class accountFragment : Fragment() {
                     aStateIn.isChecked =!isChecked
                 }
             }
-            //날짜 설정
+            //날짜 설정, date칸 누르면 달력 통해서 날짜 설정할 수 있게
             calDate.setOnClickListener {
                 showDatePicker()
             }

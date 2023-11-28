@@ -54,7 +54,7 @@
             tools:layout_editor_absoluteY="247dp" />
 
         <EditText
-            android:id="@+id/s_date"
+            android:id="@+id/cal_date"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:ems="10"
