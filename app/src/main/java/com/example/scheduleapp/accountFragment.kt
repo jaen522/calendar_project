@@ -93,6 +93,7 @@ class accountFragment : Fragment() {
             }
         }.show()
     }
+
     //데이터 저장하고 저장하고 나면 메인화면으로 이동
     private  fun  save() = with(binding){
         val state=
@@ -125,7 +126,7 @@ class accountFragment : Fragment() {
         aMemo.text.clear()
         this@accountFragment.date = null
 
-        //이동
+        //메인으로 이동
         findNavController().navigate(R.id.action_accountFragment_to_calendarFragment)
 
     }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ScheduleAdapter:RecyclerView.Adapter<ScheduleAdapter.ItemView>() {
 
     override fun onCreateViewHolder(parent:ViewGroup,viewType:Int):ItemView{
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.list_shedule,parent,false)
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_shedule,parent,false)
         return ItemView(view)
     }
     override fun onBindViewHolder(holder: ItemView,position: Int) {

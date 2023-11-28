@@ -39,19 +39,6 @@ class accountAdapter : ListAdapter<Appaccount, accountAdapter.accountItemViewHol
             nameTextView.text = item.name
             memoTextView.text = item.memo
             memoTextView.isVisible = item.memo.isNotEmpty() //메모가 비어있어도 가능하게
-
-            //income 일경우 더하고, expense인 경우 빼기
-            when (State.valueOf(item.state)) {
-                State.income -> {
-                    moneyTextView.setTextColor(Color.parseColor("#6c81c8"))
-                    moneyTextView.text = "+${item.money} won"
-                }
-
-                State.expense -> {
-                    moneyTextView.setTextColor(Color.parseColor("#d4986e"))
-                    moneyTextView.text = "-${item.money} won"
-                }
-            }
         }
     }
 
@@ -60,10 +47,12 @@ class accountAdapter : ListAdapter<Appaccount, accountAdapter.accountItemViewHol
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Appaccount>() {
+            //name으로 같은name과 같은 date를 가진 객체인지 확인
             override fun areItemsTheSame(oldItem: Appaccount, newItem: Appaccount): Boolean {
                 return oldItem.timestamp == newItem.timestamp
-            } //파이어베이스와 실시간 연동을 위해
+            }
 
+            //위의 함수가 true를 반환할때만 , 즉 두 내용의 name이 같을때
             override fun areContentsTheSame(oldItem: Appaccount, newItem: Appaccount): Boolean {
                 return oldItem.name == newItem.name &&
                         oldItem.memo == newItem.memo &&
