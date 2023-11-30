@@ -38,7 +38,7 @@ class accountAdapter : ListAdapter<Appaccount, accountAdapter.accountItemViewHol
             //입력받기
             nameTextView.text = item.name
             memoTextView.text = item.memo
-            memoTextView.isVisible = item.memo.isNotEmpty() //메모가 비어있어도 가능하게
+            //memoTextView.isVisible = item.memo.isNotEmpty() //메모가 비어있어도 가능하게
         }
     }
 
