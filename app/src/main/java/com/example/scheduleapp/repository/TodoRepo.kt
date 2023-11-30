@@ -10,26 +10,61 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 
 class TodoRepo {
-    fun getData(): LiveData<MutableList<TodoList>>{
-        val mutableData=MutableLiveData<MutableList<TodoList>>()
-        val database=Firebase.database
-        val todoRef=database.getReference("Todo")
-        todoRef.addValueEventListener(object :ValueEventListener{
-            val listTodoData:MutableList<TodoList> = mutableListOf<TodoList>()
+    private val database = Firebase.database
+    private val todoRef = database.getReference("todo")
+    private val liveData = MutableLiveData<List<TodoList>>()
+
+    init {
+        todoRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (todoSnapshot in snapshot.children) {
-                        val getData = todoSnapshot.getValue(TodoList::class.java)
-                        listTodoData.add(getData!!)
-                        mutableData.value = listTodoData
+                val todolist = mutableListOf<TodoList>()
+                for (data in snapshot.children) {
+                    val item = data.getValue(TodoList::class.java)
+                    item?.let {
+                        todolist.add(it)
                     }
                 }
+                liveData.value = todolist
             }
-
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
-        return mutableData
+    }
+    fun list(selectedDate: String): LiveData<List<TodoList>> {
+        val liveData = MutableLiveData<List<TodoList>>()
+        todoRef.orderByChild("todoDate").equalTo(selectedDate)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val todolist = mutableListOf<TodoList>()
+                    for (data in snapshot.children) {
+                        val item = data.getValue(TodoList::class.java)
+                        item?.let {
+                            todolist.add(it)
+                        }
+                    }
+                    liveData.value = todolist
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+        return liveData
+    }
+    fun insert(todoList: TodoList) {
+        val key = todoRef.push().key
+        key?.let {
+            todoRef.child(it).setValue(todoList)
+        }
+    }
+
+    fun update(todoList: TodoList) {
+        todoList.id?.let {
+            todoRef.child(it).setValue(todoList)
+        }
+    }
+
+    fun delete(todoList: TodoList) {
+        todoList.id?.let {
+            todoRef.child(it).removeValue()
+        }
     }
 }
