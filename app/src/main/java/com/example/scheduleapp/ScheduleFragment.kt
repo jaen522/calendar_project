@@ -127,7 +127,24 @@ class ScheduleFragment : Fragment() {
         // 마지막 버튼 눌렀을때 입력값 저장될 수 있게.
 
     }
+/*어케 수정하지
+    private fun showDatePicker(){
+        val selectedDate = Calendar.getInstance()
 
+        val dateSetListener = DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
+            // binding?.calDate?.text = "(${year}/${month+1}/${dayOfMonth})".Editable
+            binding?.calDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month + 1}/${dayOfMonth}")
+        }
+
+        DatePickerDialog(
+            requireContext(),
+            dateSetListener,
+            selectedDate.get(Calendar.YEAR),
+            selectedDate.get(Calendar.MONTH),
+            selectedDate.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+*/
     private fun showDatePicker() {
         val selectedDate = this.date ?: Calendar.getInstance()
 
