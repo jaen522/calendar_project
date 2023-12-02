@@ -4,7 +4,7 @@ import java.util.Date
 
 data class Appschedule(
     val name: String = "",
-    val memo: String = "",
+    val memo: String? = "",
     val date: Long = Date().time,
     val start: Long = Date().time,
     val end: Long = Date().time,

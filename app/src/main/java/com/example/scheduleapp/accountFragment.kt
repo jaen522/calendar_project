@@ -130,6 +130,7 @@ class accountFragment : Fragment() {
             if (binding?.aStateIn?.isChecked == true) State.income
             else if (binding?.aStateEx?.isChecked == true ) State.expense
             else null
+
         val money = binding?.aMoney?.text?.toString()?.trim()?.toIntOrNull()
         val name = binding?.aName?.text?.toString()?.trim()
         val memo = binding?.aMemo?.text?.toString()?.trim()
@@ -137,7 +138,8 @@ class accountFragment : Fragment() {
 
         if (state==null) return
         if (money == null || money == 0) return
-        if (name.isNullOrEmpty()) return
+        if (name==null) return
+        if (memo.isNullOrEmpty()) return
         if (date==null) return
 
         val account = Appaccount(state.name, money, name, memo,date.timeInMillis)

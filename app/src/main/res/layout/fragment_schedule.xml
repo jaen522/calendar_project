@@ -56,33 +56,50 @@
         <EditText
             android:id="@+id/cal_date"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="78dp"
+            android:cursorVisible="false"
             android:ems="10"
+            android:focusable="false"
             android:hint="date"
-            android:inputType="text"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="404dp" />
+            android:inputType="none"
+            tools:longClickable="false" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/s_time_start"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
+                android:layout_width="38dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:hint="start clock"
-                android:textSize="20sp" />
+                android:inputType="none"
+                android:longClickable="false"
+                android:minHeight="56dp" />
 
             <TextView
-                android:id="@+id/s_time_end"
-                android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:id="@+id/textView2"
+                android:layout_width="51dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_weight="1"
+                android:text="-" />
+
+            <EditText
+                android:id="@+id/s_time_end"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:hint="end clock"
-                android:textSize="20sp" />
+                android:inputType="none"
+                android:longClickable="false"
+                android:minHeight="56dp" />
 
         </LinearLayout>
 
