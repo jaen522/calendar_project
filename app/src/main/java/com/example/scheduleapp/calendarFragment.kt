@@ -1,6 +1,7 @@
 package com.example.scheduleapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,12 @@ class calendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.calendar?.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            selectedDate = "$year/${month + 1}/$dayOfMonth"
-            fetchDate(selectedDate.orEmpty())
+            try {
+                selectedDate = "$year/${month + 1}/$dayOfMonth"
+                fetchDate(selectedDate.orEmpty())
+            } catch (e: Exception) {
+                Log.e("CalendarFragment", "Error handling date change", e)
+            }
         }
         todoAdapter.setItemCheckBoxClickListener(object : TodoAdapter.ItemCheckBoxClickListener {
             override fun onClick(view: View, position: Int, itemId: Long) {
