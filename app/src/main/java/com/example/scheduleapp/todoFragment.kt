@@ -49,9 +49,12 @@ class todoFragment : Fragment() {
         val todoRef=database.getReference("todo")
         val todoName=binding?.tName?.text.toString()
         val todoData=binding?.tDate?.text.toString()
-        todoRef.push().setValue(TodoList(todoName,todoData))
+        val todoImport=binding?.tCheck?.isChecked?:false
+        val todoFinish=false
+        todoRef.push().setValue(TodoList(todoName,todoData, isChecked = todoImport,todoFinish))
         Log.d(TAG,"todoRef::$todoRef")
         binding?.tName?.text?.clear()
         binding?.tDate?.text?.clear()
+        binding?.tCheck?.isChecked=false
     }
 }

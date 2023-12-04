@@ -13,7 +13,6 @@ class TodoRepo {
     private val database = Firebase.database
     private val todoRef = database.getReference("todo")
     private val liveData = MutableLiveData<List<TodoList>>()
-
     init {
         todoRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -55,13 +54,11 @@ class TodoRepo {
             todoRef.child(it).setValue(todoList)
         }
     }
-
     fun update(todoList: TodoList) {
         todoList.id?.let {
             todoRef.child(it).setValue(todoList)
         }
     }
-
     fun delete(todoList: TodoList) {
         todoList.id?.let {
             todoRef.child(it).removeValue()

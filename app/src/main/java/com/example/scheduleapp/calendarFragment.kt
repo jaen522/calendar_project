@@ -41,7 +41,7 @@ class calendarFragment : Fragment() {
             }
         }
         todoAdapter.setItemCheckBoxClickListener(object : TodoAdapter.ItemCheckBoxClickListener {
-            override fun onClick(view: View, position: Int, itemId: Long) {
+            override fun onClick(view: View, position: Int, itemId: Long,isChecked:Boolean,todoFinish:Boolean) {
                 CoroutineScope(Dispatchers.IO).launch {
                     val todoList = viewModel.fetchDate(selectedDate.orEmpty()).value ?: return@launch
                     if (position < todoList.size) {
