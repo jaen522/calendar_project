@@ -5,37 +5,36 @@ import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scheduleapp.databinding.ListTodoBinding
 
 class TodoAdapter(private val context: Context):RecyclerView.Adapter<TodoAdapter.ViewHolder>(){
-    private var tdList= mutableListOf<TodoList>()
+    val tdList= mutableListOf<TodoList>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
-        val binding = ListTodoBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ListTodoBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
     override fun getItemCount():Int = tdList.size
     override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int) {
         holder.onBind(tdList[position])
     }
-    inner class ViewHolder(private val binding: ListTodoBinding):RecyclerView.ViewHolder(binding.root){
-        private val todoCheckbox: CheckBox = binding.tdCheck
-        private val todoName: TextView = binding.tdName
-        fun onBind(data:TodoList){
-            todoName.text=data.todoName
-            todoCheckbox.isChecked=data.isChecked
-            if (data.isChecked) {
-                todoName.paintFlags = todoName.paintFlags or STRIKE_THRU_TEXT_FLAG
-            } else {
-                todoName.paintFlags = todoName.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
+    inner class ViewHolder(val binding: ListTodoBinding):RecyclerView.ViewHolder(binding.root){
+        fun onBind(todo:TodoList?){
+            todo?.let {
+                binding.tdName.text=it.todoName
+                binding.tdCheck.isChecked=it.isChecked
+                if (it.isChecked) {
+                    binding.tdName.paintFlags = binding.tdName.paintFlags or STRIKE_THRU_TEXT_FLAG
+                } else {
+                    binding.tdName.paintFlags = binding.tdName.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
             }
 
-            todoCheckbox.setOnClickListener{
-                itemCheckBoxClickListener.onClick(it, layoutPosition,itemId)
+                binding.tdCheck.setOnClickListener{
+                    itemCheckBoxClickListener.onClick(it, layoutPosition,itemId)
+                }
             }
+
         }
     }
     private lateinit var itemCheckBoxClickListener: ItemCheckBoxClickListener
