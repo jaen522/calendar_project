@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/schedule_name_textview"
@@ -19,11 +19,7 @@
         android:id="@+id/schedule_memo_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="311dp"
-        android:layout_marginBottom="685dp"
         android:text="schedule memo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_name_textview" />
 
@@ -32,23 +28,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="76dp"
-        android:layout_marginBottom="712dp"
         android:text="schedule time"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/editTextText"
         android:layout_width="17dp"
         android:layout_height="19dp"
-        android:layout_marginBottom="712dp"
         android:ems="10"
         android:inputType="text"
         android:text="-"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/schedule_endtime_textview"
         app:layout_constraintStart_toEndOf="@+id/schedule_starttime_textview"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,12 +48,9 @@
         android:id="@+id/schedule_endtime_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="712dp"
         android:text="endtime"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.991"
         app:layout_constraintStart_toEndOf="@+id/schedule_starttime_textview"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

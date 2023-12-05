@@ -17,59 +17,7 @@ class TodoAdapter(private val context: Context):RecyclerView.Adapter<TodoAdapter
         val binding = ListTodoBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }    //날짜 선택
-    /*private var date: Calendar? = null
-        set(value) {
-            field = value
 
-            if (value == null) {
-                binding?.calDate?.setText("")
-            } else {
-                binding?.calDate?.setText(
-                    SimpleDateFormat(
-                        "yyyy/MM/dd",
-                        Locale.KOREA
-                    ).format(value.time)
-                )
-            }
-        }
-    //시각선택
-    private var startTime: Pair<Int, Int>? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.sTimeStart?.setText("")
-            } else {
-                binding?.sTimeStart?.setText(
-                    SimpleDateFormat(
-                        "HH:mm",
-                        Locale.KOREA
-                    ).format(Calendar.getInstance().apply {
-                        set(Calendar.HOUR_OF_DAY, value.first)
-                        set(Calendar.MINUTE, value.second)
-                    }.time)
-                )
-            }
-        }
-    //시각선택
-    private var endTime: Pair<Int, Int>? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.sTimeEnd?.setText("")
-            } else {
-                binding?.sTimeEnd?.setText(
-                    SimpleDateFormat(
-                        "HH:mm",
-                        Locale.KOREA
-                    ).format(Calendar.getInstance().apply {
-                        set(Calendar.HOUR_OF_DAY, value.first)
-                        set(Calendar.MINUTE, value.second)
-                    }.time)
-                )
-            }
-        }*/
     override fun getItemCount():Int = tdList.size
     override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int) {
         holder.onBind(tdList[position])

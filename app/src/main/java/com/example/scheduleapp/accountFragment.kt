@@ -7,20 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.databinding.FragmentAccountBinding
 import com.example.scheduleapp.listmodel.Appaccount
 import com.example.scheduleapp.listmodel.State
-import com.example.scheduleapp.viewmodel.AccountViewModel
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.util.Calendar
 
 class accountFragment : Fragment() {
-
-    //뷰모델 참조
-    val accviewModel : AccountViewModel by activityViewModels()
 
     var binding : FragmentAccountBinding? = null
 
@@ -91,7 +86,6 @@ class accountFragment : Fragment() {
         if (state==null) return
         if (acc_money == null || acc_money == 0) return
         if (acc_name==null) return
-        if (acc_memo.isNullOrEmpty()) return
         if (acc_date==null) return
 
 

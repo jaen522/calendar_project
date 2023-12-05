@@ -48,20 +48,9 @@ class TodoRepo {
             })
         return liveData
     }
-    fun insert(todoList: TodoList) {
-        val key = todoRef.push().key
-        key?.let {
-            todoRef.child(it).setValue(todoList)
-        }
-    }
     fun update(todoList: TodoList) {
         todoList.id?.let {
             todoRef.child(it).setValue(todoList)
-        }
-    }
-    fun delete(todoList: TodoList) {
-        todoList.id?.let {
-            todoRef.child(it).removeValue()
         }
     }
 }

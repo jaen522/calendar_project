@@ -1,5 +1,6 @@
 package com.example.scheduleapp
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -27,17 +28,18 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
             account?.let {
                 binding.accountNameTextview.text = it.accountname
                 binding.accountMemoTextview.text = it.accountmemo
-                binding.accountMoneyTextview.inputType= it.accountmoney
-
+                binding.accountMoneyTextview.text= it.accountmoney.toString()
             }
         }
     }
     fun setListData(newList: List<Appaccount>) {
         val diffCallback = AppaccountDiffCallback(accList, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
+        Log.d("AccountAdapter", "Data before update: $accList")
 
         accList.clear()
         accList.addAll(newList)
+        Log.d("AccountAdapter", "Data after update: $accList")
 
         diffResult.dispatchUpdatesTo(this)
     }

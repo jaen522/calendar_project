@@ -15,7 +15,7 @@ AccountViewModel.accountlist.observe(viewLifecycleOwner){
 class AccountViewModel : ViewModel() {
     private val accountrepo = AccountRepo()
 
-    fun fetchDate(selectedDate: String):LiveData<List<Appaccount>>{
+    fun fetchAccount(selectedDate: String):LiveData<List<Appaccount>>{
         return accountrepo.list(selectedDate)
     }
     fun insert(appaccount: Appaccount){
