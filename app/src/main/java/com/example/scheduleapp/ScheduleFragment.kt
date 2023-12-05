@@ -140,7 +140,6 @@ class ScheduleFragment : Fragment() {
 
         if (category==null) return
         if (schename == null) return
-        if (schememo.isNullOrEmpty()) return
         if (schedate==null) return
         if (startTime >= endTime) return
 

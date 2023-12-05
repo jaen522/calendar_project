@@ -24,8 +24,9 @@ class AccountRepo {
                     item?.let {
                         appaccount.add(it)
                     }
+                    liveData.value = appaccount
                 }
-                liveData.value = appaccount
+
             }
             override fun onCancelled(error: DatabaseError) {
             }

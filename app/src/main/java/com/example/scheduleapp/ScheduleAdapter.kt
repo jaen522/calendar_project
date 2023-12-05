@@ -72,9 +72,7 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            val oldItem = oldList[oldItemPosition]
-            val newItem = newList[newItemPosition]
-            return oldItem == newItem
+            return oldList[oldItemPosition] == newList[newItemPosition]
         }
     }
 

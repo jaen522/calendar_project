@@ -8,7 +8,7 @@ import com.example.scheduleapp.repository.ScheduleRepo
 class ScheduleViewModel: ViewModel() {
     private val scherepo = ScheduleRepo()
 
-    fun fetchDate(selectedDate: String): LiveData<List<Appschedule>>{
+    fun fetchSchedule(selectedDate: String): LiveData<List<Appschedule>>{
         return scherepo.list(selectedDate)
     }
     fun insert(appschedule: Appschedule){
