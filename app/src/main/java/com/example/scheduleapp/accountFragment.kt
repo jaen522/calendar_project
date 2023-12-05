@@ -31,6 +31,7 @@ class accountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.aStateIn?.setOnCheckedChangeListener { _, isChecked ->
+           //astatein을 클릭했을때 다음과 같이
             if (isChecked){
                 binding?.aStateEx?.isChecked =! isChecked
             }
@@ -50,18 +51,19 @@ class accountFragment : Fragment() {
 
     //날짜 선택을 다이얼로그 이용하여 하게하는  함수
     private fun showDatePicker(){
-        val selectedDate = Calendar.getInstance()
+        val selectedDate = Calendar.getInstance() //현재날짜를 담은 calendar객체 생성, 초기에 뜰 날짜
 
-        DatePickerDialog(requireContext()).apply {  //require는 왜 쓰인건지
-            updateDate( //updateDate 함수 어디에있는지 알아오기
+        DatePickerDialog(requireContext()).apply {
+            //requircontext는 현재 프래그먼트의 컨텍스트를 가져옴, apply를 통해 설정 초기화
+            updateDate(
                 selectedDate.get(Calendar.YEAR),
                 selectedDate.get(Calendar.MONTH),
                 selectedDate.get(Calendar.DAY_OF_MONTH)
-            )
+            ) //현재 연도,월,일을 get해서 설정함
 
             setOnDateSetListener { _, year, month, dayOfMonth ->
                 binding?.calDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month+1}/${dayOfMonth}")
-            }
+            } // 날짜를 선택했을때 선택한 날짜가 변수로 전달되고 caldate 라는 id의 textview에 업데이트 함 표시할떄는 $형식으로
         }.show()
     }
 

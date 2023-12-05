@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scheduleapp.databinding.FragmentCalendarBinding
 import com.example.scheduleapp.viewmodel.AccountViewModel
+import com.example.scheduleapp.viewmodel.ScheduleViewModel
 import com.example.scheduleapp.viewmodel.TodoViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,10 @@ class calendarFragment : Fragment() {
     private lateinit var accountAdapter: accountAdapter
     private val accountViewModel by lazy { ViewModelProvider(this).get(AccountViewModel::class.java) }
 
+    private lateinit var scheduleAdapter: ScheduleAdapter
+    private val scheduleViewModel by lazy { ViewModelProvider(this).get(ScheduleViewModel::class.java) }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,9 +36,16 @@ class calendarFragment : Fragment() {
         todoAdapter=TodoAdapter(requireContext())
         binding?.recTodo?.layoutManager=LinearLayoutManager(context)
         binding?.recTodo?.adapter=todoAdapter
+
         accountAdapter = accountAdapter(requireContext())
         binding?.recAccount?.layoutManager = LinearLayoutManager(context)
         binding?.recAccount?.adapter = accountAdapter
+
+        scheduleAdapter = ScheduleAdapter(requireContext())
+        binding?.recSchedule?.layoutManager = LinearLayoutManager(context)
+        binding?.recSchedule?.adapter = scheduleAdapter
+
+
         return binding?.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,6 +72,7 @@ class calendarFragment : Fragment() {
             }
         })
         fetchAccount(selectedDate.orEmpty())
+        fetchSchedule(selectedDate.orEmpty())
         // Account 데이터 가져오기
 
     }
@@ -77,6 +90,15 @@ class calendarFragment : Fragment() {
             }
         }
     }
+
+    private fun fetchSchedule(date: String) {
+        if (date.isNotEmpty()) {
+            scheduleViewModel.fetchDate(date).observe(viewLifecycleOwner) { scheduleList ->
+                scheduleAdapter.setListData(scheduleList)
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding=null

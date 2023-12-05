@@ -24,7 +24,7 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
     inner class ViewHolder(val binding: ItemScheduleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(schedule: Appschedule?) {
+        fun onBind(schedule: Appschedule) {
             schedule?.let {
                 binding.scheduleNameTextview.text = it.schedulename
                 binding.scheduleMemoTextview.text = it.schedulememo
@@ -72,9 +72,8 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            val oldItem = oldList[oldItemPosition]
-            val newItem = newList[newItemPosition]
-            return oldItem == newItem
+            return oldList[oldItemPosition] == newList[newItemPosition]
+
         }
     }
 
