@@ -17,12 +17,6 @@ import java.util.Calendar
 
 class accountFragment : Fragment() {
 
-<<<<<<< HEAD
-    //뷰모델 참조
-    //val accviewModel : AccountViewModel by activityViewModels()
-
-=======
->>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
     var binding : FragmentAccountBinding? = null
 
     override fun onCreateView(

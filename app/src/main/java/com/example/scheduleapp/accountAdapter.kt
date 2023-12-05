@@ -29,7 +29,6 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
                 binding.accountNameTextview.text = it.accountname
                 binding.accountMemoTextview.text = it.accountmemo
                 binding.accountMoneyTextview.text= it.accountmoney.toString()
-<<<<<<< HEAD
 
                 if ( it.accountstate == "income" ) {
                     binding.accountMoneyTextview.setTextColor(ContextCompat.getColor(context, android.R.color.holo_blue_light))
@@ -37,8 +36,6 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
                 else{
                     binding.accountMoneyTextview.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_light))
                 }
-=======
->>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
             }
         }
     }

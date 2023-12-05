@@ -20,12 +20,8 @@
     <TextView
         android:id="@+id/schedule_memo_textview"
         android:layout_width="wrap_content"
-<<<<<<< HEAD
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-=======
         android:layout_height="wrap_content"
->>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
+        android:layout_marginStart="8dp"
         android:text="schedule memo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_name_textview" />
@@ -44,15 +40,13 @@
         android:id="@+id/editTextText"
         android:layout_width="17dp"
         android:layout_height="19dp"
-<<<<<<< HEAD
         android:layout_marginTop="8dp"
-=======
->>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
         android:ems="10"
         android:inputType="text"
         android:text="--"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/schedule_endtime_textview"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/schedule_starttime_textview"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,13 +54,10 @@
         android:id="@+id/schedule_endtime_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginTop="8dp"
-=======
->>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
         android:text="endtime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/schedule_starttime_textview"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
