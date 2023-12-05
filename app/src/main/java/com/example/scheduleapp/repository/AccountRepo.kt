@@ -27,7 +27,6 @@ class AccountRepo {
                 }
                 liveData.value = appaccount
             }
-
             override fun onCancelled(error: DatabaseError) {
             }
         })

@@ -5,13 +5,14 @@ import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scheduleapp.databinding.ListTodoBinding
 
 class TodoAdapter(private val context: Context):RecyclerView.Adapter<TodoAdapter.ViewHolder>(){
-    val tdList= mutableListOf<TodoList>()
+    private val tdList= mutableListOf<TodoList>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
         val binding = ListTodoBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
@@ -22,6 +23,8 @@ class TodoAdapter(private val context: Context):RecyclerView.Adapter<TodoAdapter
         holder.onBind(tdList[position])
     }
     inner class ViewHolder(val binding: ListTodoBinding):RecyclerView.ViewHolder(binding.root){
+
+        private var todoFinish = itemView.findViewById<CheckBox>(R.id.td_check)
         fun onBind(todo:TodoList?){
             todo?.let {
                 binding.tdName.text=it.todoName
@@ -30,16 +33,18 @@ class TodoAdapter(private val context: Context):RecyclerView.Adapter<TodoAdapter
                 } else {
                     binding.tdName.setTextColor(ContextCompat.getColor(context, android.R.color.primary_text_light))
                 }
-                binding.tdCheck.setOnClickListener {
-                    itemCheckBoxClickListener.onClick(
-                        it,layoutPosition,itemId,todo.isChecked,todo.todoFinish
-                    )
-                }
+
+                todoFinish.isChecked = it.isChecked
                 if (it.todoFinish) {
                     // isChecked가 false이고 todoImport가 true인 경우에만 빨간색으로 설정
                     binding.tdName.paintFlags = binding.tdName.paintFlags or STRIKE_THRU_TEXT_FLAG
                 } else {
                     binding.tdName.paintFlags =binding.tdName.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
+                }
+                binding.tdCheck.setOnClickListener {
+                    itemCheckBoxClickListener.onClick(
+                        it,layoutPosition,itemId,todoFinish.isChecked,todoFinish.isChecked
+                    )
                 }
             }
         }

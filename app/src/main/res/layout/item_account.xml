@@ -9,8 +9,12 @@
         android:id="@+id/account_name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
+=======
+        android:layout_marginStart="1dp"
+>>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
         android:text="accountname"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,18 +24,36 @@
         android:id="@+id/account_memo_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginStart="16dp"
         android:text="accountmemo"
+=======
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="320dp"
+        android:text="accountmemo"
+        app:layout_constraintEnd_toEndOf="parent"
+>>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/account_name_textview" />
 
     <TextView
         android:id="@+id/account_money_textview"
+<<<<<<< HEAD
         android:layout_width="54dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
         android:text="money"
         app:layout_constraintEnd_toEndOf="parent"
+=======
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="244dp"
+        android:layout_marginEnd="1dp"
+        android:text="money"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/account_name_textview"
+>>>>>>> d4b08f4b32d96c3f0d5545475c357fefb50c1d78
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

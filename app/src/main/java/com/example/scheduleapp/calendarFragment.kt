@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scheduleapp.databinding.FragmentCalendarBinding
+import com.example.scheduleapp.viewmodel.AccountViewModel
 import com.example.scheduleapp.viewmodel.TodoViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,8 @@ class calendarFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider(this).get(TodoViewModel::class.java) }
     private var binding: FragmentCalendarBinding?=null
     private var selectedDate: String?=null
+    private lateinit var accountAdapter: accountAdapter
+    private val accountViewModel by lazy { ViewModelProvider(this).get(AccountViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,9 @@ class calendarFragment : Fragment() {
         todoAdapter=TodoAdapter(requireContext())
         binding?.recTodo?.layoutManager=LinearLayoutManager(context)
         binding?.recTodo?.adapter=todoAdapter
+        accountAdapter = accountAdapter(requireContext())
+        binding?.recAccount?.layoutManager = LinearLayoutManager(context)
+        binding?.recAccount?.adapter = accountAdapter
         return binding?.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +42,7 @@ class calendarFragment : Fragment() {
             try {
                 selectedDate = "$year/${month + 1}/$dayOfMonth"
                 fetchDate(selectedDate.orEmpty())
+                fetchAccount(selectedDate.orEmpty())
             } catch (e: Exception) {
                 Log.e("CalendarFragment", "Error handling date change", e)
             }
@@ -52,11 +59,21 @@ class calendarFragment : Fragment() {
                 }
             }
         })
+        fetchAccount(selectedDate.orEmpty())
+        // Account 데이터 가져오기
+
     }
     private fun fetchDate(date: String) {
         if (date.isNotEmpty()) {
             viewModel.fetchDate(date).observe(viewLifecycleOwner) { todoList ->
                 todoAdapter.setListData(todoList)
+            }
+        }
+    }
+    private fun fetchAccount(date: String) {
+        if (date.isNotEmpty()) {
+            accountViewModel.fetchAccount(date).observe(viewLifecycleOwner) { accountList ->
+                accountAdapter.setListData(accountList)
             }
         }
     }
