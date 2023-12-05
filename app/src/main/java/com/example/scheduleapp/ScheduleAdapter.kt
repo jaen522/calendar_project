@@ -20,7 +20,8 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
     override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
         holder.onBind(scheList[position])
     }
-/*
+/* 여기에 그 카테고리 마다 이미지 다르게 띄우는 코드 넣으면 돼
+이미 적혀있는 코드는 혹시 몰라서 그냥 두었어 없애도 돼
         //val item = getItem(position)
         val binding = holder.binding
 
@@ -87,24 +88,3 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
     }
 
 }
-/*
-//class ScheduleAdapter:  ListAdapter<Appschedule, ScheduleAdapter.ScheduleItemViewHolder>(diffUtil) {
-    //class ItemView(view: View):RecyclerView.ViewHolder(view){}
-
-    class  ScheduleItemViewHolder(val binding: ItemSheduleBinding) :
-        RecyclerView.ViewHolder(binding.root)
-
-    companion object{
-        val diffUtil = object : DiffUtil.ItemCallback<Appschedule>() {
-            override fun areItemsTheSame(oldItem: Appschedule, newItem: Appschedule): Boolean {
-                return oldItem.timestamp == newItem.timestamp
-            }
-            //위의 함수가 true를 반환할때만 , 즉 두 내용의 name이 같을때
-            override fun areContentsTheSame(oldItem: Appschedule, newItem: Appschedule): Boolean {
-                return oldItem.name == newItem.name &&
-                        oldItem.memo == newItem.memo &&
-                        oldItem.date == newItem.date
-            }
-        }
-    }
-       */

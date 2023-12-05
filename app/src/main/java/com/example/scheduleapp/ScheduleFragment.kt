@@ -84,10 +84,6 @@ class ScheduleFragment : Fragment() {
         }.show()
     }
 
-    /**
-     * 시간 선택 다이얼로그를 띄운다.
-     * @param isStartTime 시작 시간을 설정한다면 true, 종료 시간을 설정한다면 false
-     */
     private var selectedStartTime: Calendar? = null
     private var selectedEndTime: Calendar? = null
     private fun showStartTimePicker() {
@@ -106,9 +102,8 @@ class ScheduleFragment : Fragment() {
 
         }, currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE), false)
 
-
-    startTimePicker.setTitle("Select Start Time")
-    startTimePicker.show()
+        startTimePicker.setTitle("Select Start Time")
+        startTimePicker.show()
     }
 
     private fun showEndTimePicker() {
@@ -142,7 +137,6 @@ class ScheduleFragment : Fragment() {
         val schedate = binding?.calDate?.text?.toString()
         val startTime = binding?.sTimeStart?.text.toString()
         val endTime = binding?.sTimeEnd?.text.toString()
-//시각 추가
 
         if (category==null) return
         if (schename == null) return
@@ -166,106 +160,8 @@ class ScheduleFragment : Fragment() {
         binding?.sTimeStart?.text?.clear()
         binding?.sTimeEnd?.text?.clear()
 
-        //시각 추가
-
-
         //메인화면 이동
         findNavController().navigate(R.id.action_scheduleFragment_to_calendarFragment)
 
     }
 }
-
-/*어케 수정하지
-
-    //날짜 선택
-    /*private var date: Calendar? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.calDate?.setText("")
-            } else {
-                binding?.calDate?.setText(
-                    SimpleDateFormat(
-                        "yyyy/MM/dd",
-                        Locale.KOREA
-                    ).format(value.time)
-                )
-            }
-        }
-    //시각선택
-    private var startTime: Pair<Int, Int>? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.sTimeStart?.setText("")
-            } else {
-                binding?.sTimeStart?.setText(
-                    SimpleDateFormat(
-                        "HH:mm",
-                        Locale.KOREA
-                    ).format(Calendar.getInstance().apply {
-                        set(Calendar.HOUR_OF_DAY, value.first)
-                        set(Calendar.MINUTE, value.second)
-                    }.time)
-                )
-            }
-        }
-    //시각선택
-    private var endTime: Pair<Int, Int>? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.sTimeEnd?.setText("")
-            } else {
-                binding?.sTimeEnd?.setText(
-                    SimpleDateFormat(
-                        "HH:mm",
-                        Locale.KOREA
-                    ).format(Calendar.getInstance().apply {
-                        set(Calendar.HOUR_OF_DAY, value.first)
-                        set(Calendar.MINUTE, value.second)
-                    }.time)
-                )
-            }
-        }*/
-    private fun showDatePicker(){
-        val selectedDate = Calendar.getInstance()
-
-        val dateSetListener = DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
-            // binding?.calDate?.text = "(${year}/${month+1}/${dayOfMonth})".Editable
-            binding?.calDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month + 1}/${dayOfMonth}")
-        }
-
-        DatePickerDialog(
-            requireContext(),
-            dateSetListener,
-            selectedDate.get(Calendar.YEAR),
-            selectedDate.get(Calendar.MONTH),
-            selectedDate.get(Calendar.DAY_OF_MONTH)
-        ).show()
-    }
-*/
-
-/*시각 추가
-        val schedule = Appschedule(
-            name,
-            memo,
-            date.timeInMillis,
-            Calendar.getInstance().apply {
-                time = date.time
-                set(Calendar.HOUR_OF_DAY, startTime?.first ?: 0)
-                set(Calendar.MINUTE, startTime?.second?: 0)
-            }.timeInMillis,
-            Calendar.getInstance().apply {
-                time = date.time
-                set(Calendar.HOUR_OF_DAY, endTime?.first?: 0)
-
-                set(Calendar.MINUTE, endTime?.second ?: 0)
-            }.timeInMillis,
-            category.name,
-        )
-        //val schedule = Appschedule(name, memo, date.timeInMillis , category.name)
-*/

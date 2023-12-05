@@ -22,27 +22,7 @@ class accountFragment : Fragment() {
     //뷰모델 참조
     val accviewModel : AccountViewModel by activityViewModels()
 
-   // private lateinit var binding : FragmentAccountBinding
-    // var binding: Fragment어쩌구? = null 을 안 쓰는 이유?
-
     var binding : FragmentAccountBinding? = null
-
-    //날짜 선택
-   /*private var date: Calendar? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.calDate?.setText("")
-            } else {
-                binding?.calDate?.setText(
-                    SimpleDateFormat(
-                        "yyyy/MM/dd", 
-                        Locale.KOREA
-                    ).format(value.time)
-                )
-            }
-        }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,23 +73,8 @@ class accountFragment : Fragment() {
                 binding?.calDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month+1}/${dayOfMonth}")
             }
 
-            /*setOnDateSetListener { _, y1, m1, d1 ->
-                val date = Calendar.getInstance().apply {
-                    set(y1,m1,d1,0,0,0)
-                    set(Calendar.MILLISECOND, 0)
-                }
-            }*/
         }.show()
     }
-    /*
-    val cal= Calendar.getInstance()
-        val dateSetListener= DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
-            binding?.tDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month + 1}/${dayOfMonth}")
-        }
-        DatePickerDialog(requireContext(),dateSetListener,cal.get(Calendar.YEAR),
-            cal.get(Calendar.MONTH),
-            cal.get(Calendar.DAY_OF_MONTH)).show()
-     */
 
     private fun save() {
         val state =

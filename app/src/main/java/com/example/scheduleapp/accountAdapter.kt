@@ -65,7 +65,7 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
     }
 
 }
-    //  binding.memoTextView.isVisible = item.accountmemo?.isNotEmpty() == true
+
 
 
 /*
@@ -97,23 +97,4 @@ class accountAdapter : ListAdapter<Appaccount, accountAdapter.accountItemViewHol
         binding.memoTextView.isVisible = item.accountmemo?.isNotEmpty() == true
     }
 
-    class accountItemViewHolder(val binding: ItemAccountBinding) :
-        RecyclerView.ViewHolder(binding.root)
-
-    companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Appaccount>() {
-            //name으로 같은name과 같은 date를 가진 객체인지 확인
-            fun areItemsTheSame(oldItem: Appaccount, newItem: Appaccount): Boolean {
-                return oldItem.accountid == newItem.accountid
-            }
-
-            //위의 함수가 true를 반환할때만 , 즉 두 내용의 name이 같을때
-            fun areContentsTheSame(oldItem: Appaccount, newItem: Appaccount): Boolean {
-                return oldItem.accountname == newItem.accountname &&
-                        oldItem.accountmemo == newItem.accountmemo &&
-                        oldItem.accountmoney == newItem.accountmoney &&
-                        oldItem.accountdate == newItem.accountdate
-            }
-        }
-    }
 }*/
