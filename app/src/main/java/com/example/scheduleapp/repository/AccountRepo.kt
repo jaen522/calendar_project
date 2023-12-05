@@ -38,15 +38,14 @@ class AccountRepo {
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val appaccount = mutableListOf<Appaccount>()
-                    for (data in snapshot.children){
+                    for (data in snapshot.children) {
                         val item = data.getValue(Appaccount::class.java)
                         item?.let {
                             appaccount.add(it)
                         }
+                    }
                         liveData.value = appaccount
                     }
-                }
-
                 override fun onCancelled(error: DatabaseError) {
                 }
             })

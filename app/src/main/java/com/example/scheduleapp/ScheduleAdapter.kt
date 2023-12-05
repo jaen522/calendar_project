@@ -24,7 +24,7 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
     inner class ViewHolder(val binding: ItemScheduleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(schedule: Appschedule?) {
+        fun onBind(schedule: Appschedule) {
             schedule?.let {
                 binding.scheduleNameTextview.text = it.schedulename
                 binding.scheduleMemoTextview.text = it.schedulememo

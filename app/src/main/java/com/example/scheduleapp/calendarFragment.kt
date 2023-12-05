@@ -24,15 +24,15 @@ import kotlinx.coroutines.launch
 
 class calendarFragment : Fragment() {
     private var binding: FragmentCalendarBinding?=null
-
     private val scheduleViewModel by lazy { ViewModelProvider(this).get(ScheduleViewModel::class.java) }
     private lateinit var scheduleAdapter: ScheduleAdapter
     private lateinit var todoAdapter: TodoAdapter
     private val viewModel by lazy { ViewModelProvider(this).get(TodoViewModel::class.java) }
+    private var selectedDate: String?=null
     private lateinit var accountAdapter: accountAdapter
     private val accountViewModel by lazy { ViewModelProvider(this).get(AccountViewModel::class.java) }
-    private var selectedDate: String?=null
     private lateinit var todoRef: DatabaseReference
+
 
 
     override fun onCreateView(
@@ -49,7 +49,6 @@ class calendarFragment : Fragment() {
         accountAdapter = accountAdapter(requireContext())
         binding?.recAccount?.layoutManager = LinearLayoutManager(context)
         binding?.recAccount?.adapter = accountAdapter
-
         return binding?.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,7 +59,6 @@ class calendarFragment : Fragment() {
                 fetchSchedule(selectedDate.orEmpty())
                 fetchDate(selectedDate.orEmpty())
                 fetchAccount(selectedDate.orEmpty())
-
             } catch (e: Exception) {
             }
         }
