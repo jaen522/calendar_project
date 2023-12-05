@@ -2,7 +2,6 @@ package com.example.scheduleapp
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scheduleapp.databinding.ItemAccountBinding
@@ -10,7 +9,7 @@ import com.example.scheduleapp.listmodel.Appaccount
 
 
 class accountAdapter(private val context: Context):RecyclerView.Adapter<accountAdapter.ViewHolder>() {
-    private var accList = mutableListOf<Appaccount>()
+    val accList = mutableListOf<Appaccount>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): accountAdapter.ViewHolder {
         val binding = ItemAccountBinding.inflate(LayoutInflater.from(parent.context))
@@ -22,23 +21,17 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
         holder.onBind(accList[position])
     }
 
-    inner class ViewHolder(private val binding: ItemAccountBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemAccountBinding) :RecyclerView.ViewHolder(binding.root) {
 
-        private val accountname: TextView = binding.nameTextView
-        private val accountmemo: TextView = binding.memoTextView
-        private val accountmoney: TextView = binding.moneyTextView
+        fun onBind(account: Appaccount) {
+            account?.let {
+                binding.accountNameTextview.text = it.accountname
+                binding.accountMemoTextview.text = it.accountmemo
+                binding.accountMoneyTextview.inputType= it.accountmoney
 
-
-        fun onBind(data: Appaccount) {
-            accountname.text = data.accountname
-            accountmemo.text = data.accountmemo
-            accountmoney.inputType = data.accountmoney
-
-
+            }
         }
     }
-    //todo에서는 checkbox관련
     fun setListData(newList: List<Appaccount>) {
         val diffCallback = AppaccountDiffCallback(accList, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
