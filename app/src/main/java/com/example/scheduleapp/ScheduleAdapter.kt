@@ -63,7 +63,6 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
 
         override fun getNewListSize(): Int {
             return newList.size
-
         }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
