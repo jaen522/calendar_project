@@ -32,9 +32,13 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
 
                 if ( it.accountstate == "income" ) {
                     binding.accountMoneyTextview.setTextColor(ContextCompat.getColor(context, android.R.color.holo_blue_light))
+                    binding.accountStateTextview.text = "+"
+                    binding.accountStateTextview.setTextColor(ContextCompat.getColor(context,android.R.color.holo_blue_light))
                 }
                 else{
                     binding.accountMoneyTextview.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_light))
+                    binding.accountStateTextview.text = "-"
+                    binding.accountStateTextview.setTextColor(ContextCompat.getColor(context,android.R.color.holo_red_light))
                 }
             }
         }
