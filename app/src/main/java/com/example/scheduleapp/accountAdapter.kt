@@ -25,7 +25,6 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
     inner class ViewHolder(private val binding: ItemAccountBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-
         private val accountname: TextView = binding.nameTextView
         private val accountmemo: TextView = binding.memoTextView
         private val accountmoney: TextView = binding.moneyTextView

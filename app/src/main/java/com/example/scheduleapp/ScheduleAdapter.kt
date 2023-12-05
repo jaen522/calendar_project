@@ -1,33 +1,26 @@
 package com.example.scheduleapp
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.example.scheduleapp.databinding.ItemSheduleBinding
-import com.example.scheduleapp.listmodel.Appschedule
-import com.example.scheduleapp.listmodel.Category
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+/*
 
-
-class ScheduleAdapter:  ListAdapter<Appschedule, ScheduleAdapter.ScheduleItemViewHolder>(diffUtil) {
-
-    override fun onCreateViewHolder(parent:ViewGroup,viewType:Int):ScheduleItemViewHolder{
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemSheduleBinding.inflate(inflater)
-        return ScheduleItemViewHolder(binding)
+class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<accountAdapter.ViewHolder>() {
+    private var scheList = mutableListOf<Appschedule>()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleAdapter.ViewHolder {
+        val binding = ItemSheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
-    override fun onBindViewHolder(holder: ScheduleItemViewHolder,position: Int) {
-        val item = getItem(position)
+
+    override fun getItemCount(): Int = scheList.size
+
+    /*여기가 그 출력시키는 코드 같은데 todo의 경우에 색깔 코드길래 그래서 여기다 적으면 될둣
+    override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
+        holder.onBind(scheList[position])
+
+        //val item = getItem(position)
         val binding = holder.binding
 
         binding.titleScheList.isVisible = position == 0
 
-        when(Category.valueOf(item.category)) {
+        when (Category.valueOf(item.category)) {
             Category.school -> binding.categoryIndicator.setImageResource(R.drawable.school)
             Category.friends -> binding.categoryIndicator.setImageResource(R.drawable.friends)
             Category.workout -> binding.categoryIndicator.setImageResource(R.drawable.workout)
@@ -38,13 +31,57 @@ class ScheduleAdapter:  ListAdapter<Appschedule, ScheduleAdapter.ScheduleItemVie
         val timeFormat = SimpleDateFormat("HH:mm", Locale.KOREA)
         binding.timeTextView.text =
             "${timeFormat.format(Date(item.start))} - ${timeFormat.format(Date(item.end))}"
+    }*/
+
+
+    inner class ViewHolder(private val binding: ItemSheduleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        private val schedulename: TextView = binding.nameTextView
+        private val schedulememo: TextView = binding.memoTextView
+
 
 
     }
 
+    fun setListData(newList: List<Appschedule>) {
+        val diffCallback = AppScheduleDiffCallback(scheList, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        scheList.clear()
+        scheList.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
 
-    //class ItemView(view: View):RecyclerView.ViewHolder(view){
-    //}
+    }
+
+    private class AppScheduleDiffCallback(
+        private val oldList: List<Appschedule>,
+        private val newList: List<Appschedule>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int {
+            return oldList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newList.size
+
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].scheduleid == newList[newItemPosition].scheduleid
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            val oldItem = oldList[oldItemPosition]
+            val newItem = newList[newItemPosition]
+            return oldItem == newItem  //뭐 더 있긴함
+        }
+    }
+
+}
+/*
+//class ScheduleAdapter:  ListAdapter<Appschedule, ScheduleAdapter.ScheduleItemViewHolder>(diffUtil) {
+    //class ItemView(view: View):RecyclerView.ViewHolder(view){}
+
     class  ScheduleItemViewHolder(val binding: ItemSheduleBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -61,5 +98,4 @@ class ScheduleAdapter:  ListAdapter<Appschedule, ScheduleAdapter.ScheduleItemVie
             }
         }
     }
-
-}
+       */
