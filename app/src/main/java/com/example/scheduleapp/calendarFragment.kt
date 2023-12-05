@@ -17,10 +17,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class calendarFragment : Fragment() {
-    private lateinit var todoAdapter: TodoAdapter
-    private val viewModel by lazy { ViewModelProvider(this).get(TodoViewModel::class.java) }
+
     private var binding: FragmentCalendarBinding?=null
     private var selectedDate: String?=null
+
+    private lateinit var todoAdapter: TodoAdapter
+    private val viewModel by lazy { ViewModelProvider(this).get(TodoViewModel::class.java) }
+
     private lateinit var accountAdapter: accountAdapter
     private val accountViewModel by lazy { ViewModelProvider(this).get(AccountViewModel::class.java) }
 
@@ -33,6 +36,7 @@ class calendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentCalendarBinding.inflate(inflater)
+
         todoAdapter=TodoAdapter(requireContext())
         binding?.recTodo?.layoutManager=LinearLayoutManager(context)
         binding?.recTodo?.adapter=todoAdapter
@@ -45,7 +49,6 @@ class calendarFragment : Fragment() {
         binding?.recSchedule?.layoutManager = LinearLayoutManager(context)
         binding?.recSchedule?.adapter = scheduleAdapter
 
-
         return binding?.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +58,7 @@ class calendarFragment : Fragment() {
                 selectedDate = "$year/${month + 1}/$dayOfMonth"
                 fetchDate(selectedDate.orEmpty())
                 fetchAccount(selectedDate.orEmpty())
+                fetchSchedule(selectedDate.orEmpty())
             } catch (e: Exception) {
                 Log.e("CalendarFragment", "Error handling date change", e)
             }

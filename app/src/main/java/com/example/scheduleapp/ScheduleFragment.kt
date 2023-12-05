@@ -22,8 +22,6 @@ import java.util.Locale
 
 class ScheduleFragment : Fragment() {
 
-   // val scheduleviewmodel : ScheduleViewModel by activityViewModels()
-
     var binding: FragmentScheduleBinding? = null
 
     override fun onCreateView(
