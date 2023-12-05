@@ -3,9 +3,11 @@ package com.example.scheduleapp
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.scheduleapp.databinding.FragmentScheduleBinding
@@ -20,74 +22,16 @@ import java.util.Locale
 
 class ScheduleFragment : Fragment() {
 
+   // val scheduleviewmodel : ScheduleViewModel by activityViewModels()
+
     var binding: FragmentScheduleBinding? = null
 
-    //날짜 선택
-    private var date: Calendar? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.calDate?.setText("")
-            } else {
-                binding?.calDate?.setText(
-                    SimpleDateFormat(
-                        "yyyy/MM/dd",
-                        Locale.KOREA
-                    ).format(value.time)
-                )
-            }
-        }
-    //시각선택
-    private var startTime: Pair<Int, Int>? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.sTimeStart?.setText("")
-            } else {
-                binding?.sTimeStart?.setText(
-                    SimpleDateFormat(
-                        "HH:mm",
-                        Locale.KOREA
-                    ).format(Calendar.getInstance().apply {
-                        set(Calendar.HOUR_OF_DAY, value.first)
-                        set(Calendar.MINUTE, value.second)
-                    }.time)
-                )
-            }
-        }
-    //시각선택
-    private var endTime: Pair<Int, Int>? = null
-        set(value) {
-            field = value
-
-            if (value == null) {
-                binding?.sTimeEnd?.setText("")
-            } else {
-                binding?.sTimeEnd?.setText(
-                    SimpleDateFormat(
-                        "HH:mm",
-                        Locale.KOREA
-                    ).format(Calendar.getInstance().apply {
-                        set(Calendar.HOUR_OF_DAY, value.first)
-                        set(Calendar.MINUTE, value.second)
-                    }.time)
-                )
-            }
-        }
-
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
         return binding?.root
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -114,39 +58,18 @@ class ScheduleFragment : Fragment() {
             showDatePicker()
         }
         binding?.sTimeStart?.setOnClickListener {
-            showTimePicker(true)
+            showStartTimePicker()
         }
         binding?.sTimeEnd?.setOnClickListener {
-            showTimePicker(false)
+            showEndTimePicker()
         }
         binding?.finishSchedule?.setOnClickListener {
             save()
         }
-        //date 설정하려고 눌렀을 시 달력칸에서 선택할 수 있게
-        //시각 선택할려고 눌렀을 시 시계에서 선택할 수 있게
-        // 마지막 버튼 눌렀을때 입력값 저장될 수 있게.
-
     }
-/*어케 수정하지
-    private fun showDatePicker(){
-        val selectedDate = Calendar.getInstance()
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
-            // binding?.calDate?.text = "(${year}/${month+1}/${dayOfMonth})".Editable
-            binding?.calDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month + 1}/${dayOfMonth}")
-        }
-
-        DatePickerDialog(
-            requireContext(),
-            dateSetListener,
-            selectedDate.get(Calendar.YEAR),
-            selectedDate.get(Calendar.MONTH),
-            selectedDate.get(Calendar.DAY_OF_MONTH)
-        ).show()
-    }
-*/
     private fun showDatePicker() {
-        val selectedDate = this.date ?: Calendar.getInstance()
+        val selectedDate = Calendar.getInstance()
 
         DatePickerDialog(requireContext()).apply {  //require는 왜 쓰인건지
             updateDate( //updateDate 함수 어디에있는지 알아오기
@@ -155,45 +78,51 @@ class ScheduleFragment : Fragment() {
                 selectedDate.get(Calendar.DAY_OF_MONTH)
             )
 
-            setOnDateSetListener { _, y1, m1, d1 ->
-                val date = Calendar.getInstance().apply {
-                    set(y1, m1, d1, 0, 0, 0)
-                    set(Calendar.MILLISECOND, 0)
-                }
-                this@ScheduleFragment.date =date
+            setOnDateSetListener { _, year, month, dayOfMonth ->
+                binding?.calDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month+1}/${dayOfMonth}")
             }
         }.show()
     }
 
-    /**
-     * 시간 선택 다이얼로그를 띄운다.
-     * @param isStartTime 시작 시간을 설정한다면 true, 종료 시간을 설정한다면 false
-     */
-    private fun showTimePicker(isStartTime: Boolean) {
-        val now = run {
-            val calendar = Calendar.getInstance()
-            return@run calendar.get(Calendar.HOUR_OF_DAY) to calendar.get(Calendar.MINUTE)
-        }
+    private var selectedStartTime: Calendar? = null
+    private var selectedEndTime: Calendar? = null
+    private fun showStartTimePicker() {
+        val currentTime = Calendar.getInstance()
 
-        val selectedTime = if (isStartTime) {
-            startTime ?: now
-        } else {
-            endTime ?: now
-        }
+        val startTimePicker = TimePickerDialog(requireContext(), { _, hourOfDay, minute ->
 
-        TimePickerDialog(
-            requireContext(),
-            { _, p1, p2 ->
-                if (isStartTime) {
-                    startTime = p1 to p2
-                } else {
-                    endTime = p1 to p2
-                }
-            },
-            selectedTime.first,
-            selectedTime.second,
-            false
-        ).show()
+            selectedStartTime = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, hourOfDay)
+                set(Calendar.MINUTE, minute)
+            }
+
+            val selectedStartTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(selectedStartTime!!.time)
+            val sTimetextview = view?.findViewById<TextView>(R.id.s_time_start)
+            sTimetextview?.text = selectedStartTime
+
+        }, currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE), false)
+
+        startTimePicker.setTitle("Select Start Time")
+        startTimePicker.show()
+    }
+
+    private fun showEndTimePicker() {
+        val currentTime = Calendar.getInstance()
+
+        val endTimePicker = TimePickerDialog(requireContext(), { _, hourOfDay, minute ->
+            // 종료 시간 선택
+            selectedEndTime = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, hourOfDay)
+                set(Calendar.MINUTE, minute)
+            }
+            val selectedendTime = SimpleDateFormat("HH:mm",Locale.getDefault()).format(selectedEndTime!!.time)
+            val eTimetextview = view?.findViewById<TextView>(R.id.s_time_end)
+            eTimetextview?.text = selectedendTime
+
+        }, currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE), false)
+
+        endTimePicker.setTitle("Select End Time")
+        endTimePicker.show()
     }
 
     private fun save() {
@@ -203,46 +132,23 @@ class ScheduleFragment : Fragment() {
             else if (binding?.chkWorkout?.isChecked == true) Category.workout
             else null
 
-        val name = binding?.sName?.text?.toString()?.trim()
-        val memo = binding?.sMemo?.text?.toString()?.trim()
-        val date = this@ScheduleFragment.date
-        val startTime = this@ScheduleFragment.startTime
-        val endTime = this@ScheduleFragment.endTime
-//시각 추가
+        val schename = binding?.sName?.text?.toString()
+        val schememo = binding?.sMemo?.text?.toString()
+        val schedate = binding?.calDate?.text?.toString()
+        val startTime = binding?.sTimeStart?.text.toString()
+        val endTime = binding?.sTimeEnd?.text.toString()
 
         if (category==null) return
-        if (name == null) return
-        if (memo.isNullOrEmpty()) return
-        if (date==null) return
-        if (((startTime?.first ?: 0) * 60 + (startTime?.second ?: 0)) >= ((endTime?.first?:0)*60 + (endTime?.second?: 0))){
-            return
-        }
-
-
-//시각 추가
-        val schedule = Appschedule(
-            name,
-            memo,
-            date.timeInMillis,
-            Calendar.getInstance().apply {
-                time = date.time
-                set(Calendar.HOUR_OF_DAY, startTime?.first ?: 0)
-                set(Calendar.MINUTE, startTime?.second?: 0)
-            }.timeInMillis,
-            Calendar.getInstance().apply {
-                time = date.time
-                set(Calendar.HOUR_OF_DAY, endTime?.first?: 0)
-                set(Calendar.MINUTE, endTime?.second ?: 0)
-            }.timeInMillis,
-            category.name,
-        )
-        //val schedule = Appschedule(name, memo, date.timeInMillis , category.name)
+        if (schename == null) return
+        if (schememo.isNullOrEmpty()) return
+        if (schedate==null) return
+        if (startTime >= endTime) return
 
         //firebase 연동
         Firebase.database.reference
             .child("schedule_list")
             .push()
-            .setValue(schedule)
+            .setValue(Appschedule(null, schename, schememo ,schedate ,startTime,endTime,category.name))
 
         //리셋
         binding?.chkSchool?.isChecked = false
@@ -250,8 +156,9 @@ class ScheduleFragment : Fragment() {
         binding?.chkWorkout?.isChecked = false
         binding?.sName?.text?.clear()
         binding?.sMemo?.text?.clear()
-        //시각 추가
-        this@ScheduleFragment.date = null
+        binding?.calDate?.text?.clear()
+        binding?.sTimeStart?.text?.clear()
+        binding?.sTimeEnd?.text?.clear()
 
         //메인화면 이동
         findNavController().navigate(R.id.action_scheduleFragment_to_calendarFragment)

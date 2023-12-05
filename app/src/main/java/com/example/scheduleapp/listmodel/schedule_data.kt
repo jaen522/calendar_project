@@ -1,15 +1,13 @@
 package com.example.scheduleapp.listmodel
 
-import java.util.Date
-
 data class Appschedule(
-    val name: String = "",
-    val memo: String? = "",
-    val date: Long = Date().time,
-    val start: Long = Date().time,
-    val end: Long = Date().time,
-    val category: String = "",
-    val timestamp: Long = Date().time
+    val scheduleid: String? = null,
+    val schedulename: String = "",
+    val schedulememo: String? = "",
+    val scheduledate: String = "",
+    val schedulestart: String ="",
+    val scheduleend: String = "",
+    val schedulecategory: String = "",
 )
 
 enum class Category{
