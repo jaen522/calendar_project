@@ -2,6 +2,7 @@ package com.example.scheduleapp
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scheduleapp.databinding.ItemAccountBinding
@@ -22,13 +23,18 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
     }
 
     inner class ViewHolder(val binding: ItemAccountBinding) :RecyclerView.ViewHolder(binding.root) {
-
         fun onBind(account: Appaccount) {
             account?.let {
                 binding.accountNameTextview.text = it.accountname
                 binding.accountMemoTextview.text = it.accountmemo
-                binding.accountMoneyTextview.inputType= it.accountmoney
+                binding.accountMoneyTextview.text= it.accountmoney.toString()
 
+                if ( it.accountstate == "income" ) {
+                    binding.accountMoneyTextview.setTextColor(ContextCompat.getColor(context, android.R.color.holo_blue_light))
+                }
+                else{
+                    binding.accountMoneyTextview.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_light))
+                }
             }
         }
     }
@@ -63,7 +69,6 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
             return oldList[oldItemPosition] == newList[newItemPosition]
         }
     }
-
 }
 
 
