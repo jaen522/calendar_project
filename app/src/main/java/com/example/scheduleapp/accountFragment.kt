@@ -2,6 +2,7 @@ package com.example.scheduleapp
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,7 @@ import com.example.scheduleapp.listmodel.State
 import com.example.scheduleapp.viewmodel.AccountViewModel
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 class accountFragment : Fragment() {
 
@@ -29,7 +28,7 @@ class accountFragment : Fragment() {
     var binding : FragmentAccountBinding? = null
 
     //날짜 선택
-    private var date: Calendar? = null
+   /*private var date: Calendar? = null
         set(value) {
             field = value
 
@@ -43,7 +42,7 @@ class accountFragment : Fragment() {
                     ).format(value.time)
                 )
             }
-        }
+        }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,9 +56,9 @@ class accountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //뷰모델 이용
-        accviewModel.accountlist.observe(viewLifecycleOwner){
+        //accviewModel.appaccount.observe(viewLifecycleOwner){ }
 
-        }
+
         //with함수 안쓰고 해보기
         binding?.aStateIn?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
@@ -78,35 +77,10 @@ class accountFragment : Fragment() {
             save()
         }
     }
-/*
-        with(binding){
-            //수입 지출 체크박스 관련
-            aStateIn.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    aStateEx.isChecked = !isChecked
-                }
-            }
 
-            aStateEx.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked){
-                    aStateIn.isChecked =!isChecked
-                }
-            }
-            //날짜 설정, date칸 누르면 달력 통해서 날짜 설정할 수 있게
-            calDate.setOnClickListener {
-                showDatePicker()
-            }
-            //끝내기누르면 저장되게
-            btnFinAccount.setOnClickListener {
-                save()
-            }
-
-        }
-    }
-*/
     //날짜 선택을 다이얼로그 이용하여 하게하는  함수
     private fun showDatePicker(){
-        val selectedDate = this.date?: Calendar.getInstance()
+        val selectedDate = Calendar.getInstance()
 
         DatePickerDialog(requireContext()).apply {  //require는 왜 쓰인건지
             updateDate( //updateDate 함수 어디에있는지 알아오기
@@ -115,15 +89,27 @@ class accountFragment : Fragment() {
                 selectedDate.get(Calendar.DAY_OF_MONTH)
             )
 
-            setOnDateSetListener { _, y1, m1, d1 ->
+            setOnDateSetListener { _, year, month, dayOfMonth ->
+                binding?.calDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month+1}/${dayOfMonth}")
+            }
+
+            /*setOnDateSetListener { _, y1, m1, d1 ->
                 val date = Calendar.getInstance().apply {
                     set(y1,m1,d1,0,0,0)
                     set(Calendar.MILLISECOND, 0)
                 }
-                this@accountFragment.date = date
-            }
+            }*/
         }.show()
     }
+    /*
+    val cal= Calendar.getInstance()
+        val dateSetListener= DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
+            binding?.tDate?.text = Editable.Factory.getInstance().newEditable("${year}/${month + 1}/${dayOfMonth}")
+        }
+        DatePickerDialog(requireContext(),dateSetListener,cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)).show()
+     */
 
     private fun save() {
         val state =
@@ -131,24 +117,24 @@ class accountFragment : Fragment() {
             else if (binding?.aStateEx?.isChecked == true ) State.expense
             else null
 
-        val money = binding?.aMoney?.text?.toString()?.trim()?.toIntOrNull()
-        val name = binding?.aName?.text?.toString()?.trim()
-        val memo = binding?.aMemo?.text?.toString()?.trim()
-        val date = this@accountFragment.date
+        val acc_money = binding?.aMoney?.text?.toString()?.toIntOrNull()
+        val acc_name = binding?.aName?.text?.toString()
+        val acc_memo = binding?.aMemo?.text?.toString()
+        val acc_date = binding?.calDate?.text.toString()
+        //val date = this@accountFragment.date
 
         if (state==null) return
-        if (money == null || money == 0) return
-        if (name==null) return
-        if (memo.isNullOrEmpty()) return
-        if (date==null) return
+        if (acc_money == null || acc_money == 0) return
+        if (acc_name==null) return
+        if (acc_memo.isNullOrEmpty()) return
+        if (acc_date==null) return
 
-        val account = Appaccount(state.name, money, name, memo,date.timeInMillis)
 
         //firebase 연동
         Firebase.database.reference
             .child("account_list")
             .push()
-            .setValue(account)
+            .setValue(Appaccount( null, state.name , acc_money,acc_name, acc_memo, acc_date))
 
         //리셋
         binding?.aStateIn?.isChecked = false
@@ -156,7 +142,8 @@ class accountFragment : Fragment() {
         binding?.aMoney?.text?.clear()
         binding?.aName?.text?.clear()
         binding?.aMemo?.text?.clear()
-        this@accountFragment.date = null
+        binding?.calDate?.text?.clear()
+        // this@accountFragment.date = null
 
         //메인화면 이동
         findNavController().navigate(R.id.action_accountFragment_to_calendarFragment)
