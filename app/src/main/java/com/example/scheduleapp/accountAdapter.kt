@@ -76,34 +76,3 @@ class accountAdapter(private val context: Context):RecyclerView.Adapter<accountA
 }
 
 
-
-/*
-class accountAdapter : ListAdapter<Appaccount, accountAdapter.accountItemViewHolder>(diffUtil) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): accountItemViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemAccountBinding.inflate(inflater, parent, false)
-        return accountItemViewHolder(binding)
-    } //item 레이아웃처럼 보이게
-
-    override fun onBindViewHolder(holder: accountItemViewHolder, position: Int) {
-        val item = getItem(position)
-        val binding = holder.binding
-
-        binding.titleAccountList.isVisible = position == 0
-        if (position == 0) {
-            val total =
-                currentList.sumOf { if (it.accountstate == State.income.name) it.accountmoney else -it.accountmoney }
-            if (total >= 0) {
-                binding.totalTextView.setTextColor(Color.parseColor("#6c81c8"))
-                binding.totalTextView.text = "+$total won"
-            } else {
-                binding.totalTextView.setTextColor(Color.parseColor("#d4986e"))
-                binding.totalTextView.text = "$total won"
-            }
-        }
-        binding.nameTextView.text = item.accountname
-        binding.memoTextView.text = item.accountmemo
-        binding.memoTextView.isVisible = item.accountmemo?.isNotEmpty() == true
-    }
-
-}*/

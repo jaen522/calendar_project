@@ -11,14 +11,5 @@ class ScheduleViewModel: ViewModel() {
     fun fetchDate(selectedDate: String): LiveData<List<Appschedule>>{
         return scherepo.list(selectedDate)
     }
-    fun insert(appschedule: Appschedule){
-        scherepo.insert(appschedule)
-    }
-    fun update(appschedule: Appschedule){
-        scherepo.update(appschedule)
-    }
-    fun delete(appschedule: Appschedule){
-        scherepo.delete(appschedule)
-    }
 
 }

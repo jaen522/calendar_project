@@ -7,7 +7,7 @@ data class Appschedule(
     val scheduledate: String = "",
     val schedulestart: String ="",
     val scheduleend: String = "",
-    val schedulecategory: String = "",
+    val schedulecategory: String = ""
 )
 
 enum class Category{

@@ -40,7 +40,6 @@ class ScheduleAdapter(private val context: Context):RecyclerView.Adapter<Schedul
                 else{
                     binding.scheduleNameTextview.setTextColor(ContextCompat.getColor(context, android.R.color.holo_orange_light))
                 }
-
             }
         }
     }
